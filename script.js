@@ -647,3 +647,155 @@ const categories = {
     }
 };
 
+
+// ========== Display categories by Marcelle ==========
+function displayCategories() {
+    const container = document.getElementById('categoryIcons');
+    if (!container) return;
+    
+    let html = '';
+    for (let key in categories) {
+        let cat = categories[key];
+        html += `<div class="category-icon-item" data-category="${key}">
+            <div class="icon-circle"><i class="${cat.icon}"></i></div>
+            <span>${cat.name}</span>
+        </div>`;
+    }
+    container.innerHTML = html;
+    
+    document.querySelectorAll('.category-icon-item').forEach(item => {
+        item.addEventListener('click', function() {
+            showCategory(this.dataset.category);
+        });
+    });
+}
+
+function showCategory(key) {
+    const cat = categories[key];
+    const container = document.getElementById('categoriesContainer');
+    const welcome = document.querySelector('.categories-welcome');
+    const backBtn = document.getElementById('backButton');
+    
+    if (!container || !cat) return;
+    
+    if (welcome) welcome.style.display = 'none';
+    container.style.display = 'block';
+    if (backBtn) backBtn.style.display = 'inline-flex';
+    
+    let html = `<div class="category-section">
+        <div class="category-title"><i class="${cat.icon}"></i> ${cat.name}</div>
+        <div class="recipe-grid">`;
+    
+    cat.dishes.forEach((dish, index) => {
+        let folder = '';
+        if (key === 'healthy') folder = 'Healthy/';
+        else if (key === 'oriental') folder = 'Oriental/';
+        else if (key === 'desserts') folder = 'Desserts/';
+        else if (key === 'street') folder = 'Street Food/';
+        
+      
+        let imageHtml;
+        if (dish.img) {
+            imageHtml = `<div class="recipe-img-grid" style="background-image: url('${folder}${dish.img}'); background-size: cover; background-position: center;"></div>`;
+        } else {
+            imageHtml = `<div class="recipe-img-grid">${dish.emoji || '🍽️'}</div>`;
+        }
+
+        html += `<div class="recipe-card-grid" data-category="${key}" data-index="${index}">
+            ${imageHtml}
+            <div class="recipe-info-grid">
+                <div class="recipe-name-grid">${dish.name}</div>
+                <div class="recipe-name-arabic">${dish.arabic}</div>
+                <div class="recipe-description">${dish.description.substring(0,80)}...</div>
+                <div class="recipe-meta-grid">
+                    <span class="time-badge">⏱️ ${dish.time}</span>
+                    <span class="difficulty-badge">⚖️ ${dish.difficulty}</span>
+                </div>
+                <div class="servings">${dish.servings}</div>
+            </div>
+        </div>`;
+    });
+    
+    html += '</div></div>';
+    container.innerHTML = html;
+    
+    document.querySelectorAll('.recipe-card-grid').forEach(card => {
+        card.addEventListener('click', function() {
+            const category = this.dataset.category;
+            const index = this.dataset.index;
+            showRecipeDetail(category, parseInt(index));
+        });
+    });
+}
+
+function showRecipeDetail(key, index) {
+    const dish = categories[key].dishes[index];
+    const detailPage = document.getElementById('recipeDetailPage');
+    const container = document.getElementById('categoriesContainer');
+    const backBtn = document.getElementById('backButton');
+    const backToCategory = document.getElementById('backToCategoryBtn');
+    
+    if (!detailPage || !dish) return;
+    
+    
+    if (container) container.style.display = 'none';
+    if (backBtn) backBtn.style.display = 'none';
+    detailPage.style.display = 'block';
+    
+    
+    document.getElementById('detailCategory').textContent = categories[key].name;
+    document.getElementById('detailTitle').textContent = dish.name;
+    document.getElementById('detailArabic').textContent = dish.arabic;
+    document.getElementById('detailDescription').textContent = dish.description;
+    
+
+    let tagsHtml = '';
+    dish.tags.forEach(tag => {
+        tagsHtml += `<span class="tag"><i class="fas fa-tag"></i> ${tag}</span>`;
+    });
+    document.getElementById('detailTags').innerHTML = tagsHtml;
+    
+   
+    document.getElementById('detailTime').textContent = dish.time;
+    document.getElementById('detailServings').textContent = dish.servings;
+    document.getElementById('detailDifficulty').textContent = dish.difficulty;
+    
+    let ingredientsHtml = '';
+    dish.ingredients.forEach(ing => {
+        ingredientsHtml += `<li class="ingredient-item"><i class="fas fa-circle"></i> ${ing}</li>`;
+    });
+    document.getElementById('ingredientsList').innerHTML = ingredientsHtml;
+ 
+    let instructionsHtml = '';
+    dish.instructions.forEach((inst, i) => {
+        instructionsHtml += `<li class="instruction-item"><span class="instruction-number">${i+1}</span><span class="instruction-text">${inst}</span></li>`;
+    });
+    document.getElementById('instructionsList').innerHTML = instructionsHtml;
+    
+    if (backToCategory) {
+        backToCategory.onclick = function() {
+            detailPage.style.display = 'none';
+            showCategory(key);
+        };
+    }
+}
+
+const backBtn = document.getElementById('backButton');
+if (backBtn) {
+    backBtn.addEventListener('click', function() {
+        const container = document.getElementById('categoriesContainer');
+        const welcome = document.querySelector('.categories-welcome');
+        const icons = document.querySelectorAll('.category-icon-item');
+        
+        if (container) container.style.display = 'none';
+        if (welcome) welcome.style.display = 'block';
+        icons.forEach(icon => icon.style.display = 'flex');
+        this.style.display = 'none';
+        
+        const detailPage = document.getElementById('recipeDetailPage');
+        if (detailPage) detailPage.style.display = 'none';
+    });
+}
+document.addEventListener('DOMContentLoaded', function() {
+    displayCategories();
+});
