@@ -274,22 +274,28 @@
 
 // ========== PASSWORD SHOW/HIDE FUNCTIONALITY ==========
 function initPasswordToggles() {
+    // Find all password fields
     const passwordFields = document.querySelectorAll('input[type="password"]');
     
     passwordFields.forEach(field => {
-        if (field.hasAttribute('data-password-toggle')) return;
-        field.setAttribute('data-password-toggle', 'true');
+        // Skip if already has a toggle
+        if (field.hasAttribute('data-toggle-initialized')) return;
+        field.setAttribute('data-toggle-initialized', 'true');
         
-        let wrapper = field.parentElement;
-        if (!wrapper.classList.contains('password-field-wrapper')) {
+        // Find or create wrapper
+        let wrapper = field.closest('.password-field-wrapper');
+        if (!wrapper) {
             wrapper = document.createElement('div');
             wrapper.className = 'password-field-wrapper';
             field.parentNode.insertBefore(wrapper, field);
             wrapper.appendChild(field);
         }
         
-        if (wrapper.querySelector('.password-toggle-btn')) return;
+        // Remove existing toggle if any
+        const existingToggle = wrapper.querySelector('.password-toggle-btn');
+        if (existingToggle) existingToggle.remove();
         
+        // Create toggle button
         const toggleBtn = document.createElement('button');
         toggleBtn.type = 'button';
         toggleBtn.className = 'password-toggle-btn';
@@ -297,6 +303,7 @@ function initPasswordToggles() {
         toggleBtn.setAttribute('title', 'Show password');
         toggleBtn.setAttribute('aria-label', 'Show password');
         
+        // Toggle function
         toggleBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -305,14 +312,11 @@ function initPasswordToggles() {
                 field.type = 'text';
                 this.innerHTML = '<i class="far fa-eye"></i>';
                 this.setAttribute('title', 'Hide password');
-                this.setAttribute('aria-label', 'Hide password');
             } else {
                 field.type = 'password';
                 this.innerHTML = '<i class="far fa-eye-slash"></i>';
                 this.setAttribute('title', 'Show password');
-                this.setAttribute('aria-label', 'Show password');
             }
-            
             field.focus();
         });
         
@@ -320,51 +324,46 @@ function initPasswordToggles() {
     });
 }
 
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initPasswordToggles, 100);
+    initPasswordToggles();
 });
 
+// Also initialize when modals open
 const originalOpenModal = window.openModal;
 window.openModal = function(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'flex';
-        setTimeout(function() {
-            initPasswordToggles();
-        }, 150);
-    }
+    if (originalOpenModal) originalOpenModal(modalId);
+    setTimeout(initPasswordToggles, 50);
 };
 
-const modalObserver = new MutationObserver(function(mutations) {
+// Watch for dynamically added forms
+const observer = new MutationObserver(function(mutations) {
     let needsInit = false;
-    
     mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length) {
             mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1) {
-                    if (node.querySelector && node.querySelector('input[type="password"]')) {
+                if (node.nodeType === 1 && node.querySelector) {
+                    if (node.querySelector('input[type="password"]')) {
                         needsInit = true;
                     }
                 }
             });
         }
     });
-    
     if (needsInit) {
         setTimeout(initPasswordToggles, 50);
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    modalObserver.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
 });
 
 window.addEventListener('load', function() {
     initPasswordToggles();
 });
+
 // ========== HEALTHY RECIPES SECTION BY MARCELLE ==========
 const categories = {
     healthy: { 
