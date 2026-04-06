@@ -274,28 +274,22 @@
 
 // ========== PASSWORD SHOW/HIDE FUNCTIONALITY ==========
 function initPasswordToggles() {
-    // Find all password fields
     const passwordFields = document.querySelectorAll('input[type="password"]');
     
     passwordFields.forEach(field => {
-        // Skip if already has a toggle
-        if (field.hasAttribute('data-toggle-initialized')) return;
-        field.setAttribute('data-toggle-initialized', 'true');
+        if (field.hasAttribute('data-password-toggle')) return;
+        field.setAttribute('data-password-toggle', 'true');
         
-        // Find or create wrapper
-        let wrapper = field.closest('.password-field-wrapper');
-        if (!wrapper) {
+        let wrapper = field.parentElement;
+        if (!wrapper.classList.contains('password-field-wrapper')) {
             wrapper = document.createElement('div');
             wrapper.className = 'password-field-wrapper';
             field.parentNode.insertBefore(wrapper, field);
             wrapper.appendChild(field);
         }
         
-        // Remove existing toggle if any
-        const existingToggle = wrapper.querySelector('.password-toggle-btn');
-        if (existingToggle) existingToggle.remove();
+        if (wrapper.querySelector('.password-toggle-btn')) return;
         
-        // Create toggle button
         const toggleBtn = document.createElement('button');
         toggleBtn.type = 'button';
         toggleBtn.className = 'password-toggle-btn';
@@ -303,7 +297,6 @@ function initPasswordToggles() {
         toggleBtn.setAttribute('title', 'Show password');
         toggleBtn.setAttribute('aria-label', 'Show password');
         
-        // Toggle function
         toggleBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -312,11 +305,14 @@ function initPasswordToggles() {
                 field.type = 'text';
                 this.innerHTML = '<i class="far fa-eye"></i>';
                 this.setAttribute('title', 'Hide password');
+                this.setAttribute('aria-label', 'Hide password');
             } else {
                 field.type = 'password';
                 this.innerHTML = '<i class="far fa-eye-slash"></i>';
                 this.setAttribute('title', 'Show password');
+                this.setAttribute('aria-label', 'Show password');
             }
+            
             field.focus();
         });
         
@@ -324,46 +320,51 @@ function initPasswordToggles() {
     });
 }
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    initPasswordToggles();
+    setTimeout(initPasswordToggles, 100);
 });
 
-// Also initialize when modals open
 const originalOpenModal = window.openModal;
 window.openModal = function(modalId) {
-    if (originalOpenModal) originalOpenModal(modalId);
-    setTimeout(initPasswordToggles, 50);
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'flex';
+        setTimeout(function() {
+            initPasswordToggles();
+        }, 150);
+    }
 };
 
-// Watch for dynamically added forms
-const observer = new MutationObserver(function(mutations) {
+const modalObserver = new MutationObserver(function(mutations) {
     let needsInit = false;
+    
     mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList' && mutation.addedNodes.length) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
             mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1 && node.querySelector) {
-                    if (node.querySelector('input[type="password"]')) {
+                if (node.nodeType === 1) {
+                    if (node.querySelector && node.querySelector('input[type="password"]')) {
                         needsInit = true;
                     }
                 }
             });
         }
     });
+    
     if (needsInit) {
         setTimeout(initPasswordToggles, 50);
     }
 });
 
-observer.observe(document.body, {
-    childList: true,
-    subtree: true
+document.addEventListener('DOMContentLoaded', function() {
+    modalObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 });
 
 window.addEventListener('load', function() {
     initPasswordToggles();
 });
-
 // ========== HEALTHY RECIPES SECTION BY MARCELLE ==========
 const categories = {
     healthy: { 
@@ -646,7 +647,130 @@ const categories = {
     }
 };
 
-
+// ========== Oriental Recipes section by mark ==========
+    oriental: { 
+        name: 'Oriental', 
+        icon: 'fas fa-utensils', 
+        dishes: [
+            { 
+                name:'Fattah', 
+                arabic:'فتة', 
+                description:'Layers of rice, crispy bread, and tender meat with garlic vinegar and tomato sauce. A celebratory dish often served during Ramadan and special occasions.',
+                time:'50 min', 
+                difficulty:'Medium', 
+                servings:'8 servings',
+                img:'Fattah.jpeg',
+                emoji:'🍲', 
+                tags:['Medium','Oriental','Celebration'],
+                ingredients:['2 cups Egyptian rice','4 pita bread, toasted and broken','500g lamb or beef, cooked and shredded','4 garlic cloves, minced','1/4 cup vinegar','2 cups tomato sauce','1 tsp cumin','Salt and pepper','2 tbsp ghee or butter','Broth from cooking meat'],
+                instructions:['Cook meat with salt, pepper, and spices until tender. Reserve broth.','Cook rice in meat broth until fluffy.','In a pan, sauté garlic in ghee until fragrant, add vinegar and simmer.','In serving dish, layer broken pita, then rice, then meat.','Pour garlic-vinegar mixture over.','Heat tomato sauce with cumin and pour on top.','Garnish with fried nuts and parsley. Serve hot.']
+            },
+            { 
+                name:'Golash', 
+                arabic:'جولاش', 
+                description:'Layers of thin phyllo dough filled with spiced minced meat, baked until golden and crispy, then soaked in sweet syrup.',
+                time:'60 min', 
+                difficulty:'Hard', 
+                servings:'10 pieces',
+                img:'Golash.jpeg',
+                emoji:'🥟', 
+                tags:['Hard','Oriental','Savory-Sweet'],
+                ingredients:['1 package phyllo dough','500g ground beef or lamb','1 large onion, finely chopped','1 tsp cinnamon','1/2 tsp allspice','Salt and pepper','1/2 cup walnuts or pine nuts','1 cup butter, melted','Syrup: 2 cups sugar, 1 cup water, 1 lemon juice, 1 tsp rose water'],
+                instructions:['Prepare syrup: boil sugar, water, lemon for 10 minutes, add rose water, cool.','Sauté onion, add meat and spices, cook until browned. Stir in nuts.','Layer phyllo in buttered pan, brushing each layer with butter.','Spread meat mixture, cover with more buttered phyllo layers.','Cut into squares or rectangles before baking.','Bake at 350°F for 35-40 minutes until golden.','Pour cold syrup over hot golash. Let absorb before serving.']
+            },
+            { 
+                name:'Hamam Mahshi', 
+                arabic:'حمام محشي', 
+                description:'Pigeon stuffed with spiced freekeh or rice, a traditional Egyptian delicacy served on special occasions.',
+                time:'75 min', 
+                difficulty:'Hard', 
+                servings:'4 servings',
+                img:'Hamam Mahshi.jpeg',
+                emoji:'🕊️', 
+                tags:['Hard','Oriental','Special Occasion'],
+                ingredients:['4 pigeons, cleaned','1 cup freekeh or rice','1 onion, finely chopped','1/4 cup ghee or butter','1 tsp cinnamon','1 tsp allspice','Salt and pepper','2 cups chicken broth','1/2 cup nuts for garnish'],
+                instructions:['Rinse pigeons and pat dry.','Cook freekeh with half the broth and spices until partially done.','Stuff pigeons with freekeh mixture, secure openings.','Brown pigeons in ghee on all sides.','Add remaining broth, cover and simmer for 45-60 minutes until tender.','Remove pigeons, strain broth for sauce.','Serve pigeons on a bed of extra freekeh, drizzle with broth, garnish with nuts.']
+            },
+            { 
+                name:'Hawawshi', 
+                arabic:'حواوشي', 
+                description:'Spiced minced meat stuffed in pita bread and baked until crispy. A popular Egyptian street food and comfort food.',
+                time:'35 min', 
+                difficulty:'Medium', 
+                servings:'6 servings',
+                img:'Hawawshi.jpeg',
+                emoji:'🥙', 
+                tags:['Medium','Oriental','Savory'],
+                ingredients:['500g ground beef or lamb','1 large onion, grated','2 bell peppers, finely minced','3 garlic cloves, minced','1 tsp cumin','1 tsp paprika','1/2 tsp cayenne (optional)','Salt and pepper','6 large pita breads','Butter or oil for brushing'],
+                instructions:['Mix meat, onion, peppers, garlic, and spices thoroughly.','Cut pita in half to create pockets.','Stuff each pocket with meat mixture, spread evenly.','Press gently to flatten.','Brush outsides with butter or oil.','Place on baking sheet, bake at 375°F for 20-25 minutes until meat is cooked and bread is crispy.','Serve hot with tahini sauce or yogurt.']
+            },
+            { 
+                name:'Kofta', 
+                arabic:'كفتة', 
+                description:'Grilled minced meat skewers seasoned with onions, parsley, and aromatic spices. A Middle Eastern classic.',
+                time:'30 min (plus resting)', 
+                difficulty:'Easy', 
+                servings:'4 servings',
+                img:'Kofta.jpeg',
+                emoji:'🍢', 
+                tags:['Easy','Oriental','Grilled'],
+                ingredients:['500g ground beef or lamb','1 large onion, grated','1/4 cup fresh parsley, finely chopped','1 tsp cumin','1 tsp paprika','1/2 tsp cinnamon','1/2 tsp allspice','Salt and pepper','Skewers (metal or wooden soaked)'],
+                instructions:['Combine all ingredients in a bowl, mix well with hands.','Cover and refrigerate for at least 1 hour.','Divide mixture, shape around skewers in long oval shapes.','Preheat grill or grill pan to medium-high.','Grill kofta 4-5 minutes per side until cooked through.','Serve with pita, grilled vegetables, and tahini sauce.']
+            },
+            { 
+                name:'Macrona Bashamel', 
+                arabic:'مكرونة بشاميل', 
+                description:'Egyptian baked pasta with layers of spiced meat and creamy béchamel sauce. A beloved comfort food.',
+                time:'60 min', 
+                difficulty:'Medium', 
+                servings:'8 servings',
+                img:'Macrona Bashamel.jpeg',
+                emoji:'🍝', 
+                tags:['Medium','Oriental','Baked'],
+                ingredients:['500g penne or any pasta','500g ground beef','1 onion, chopped','2 cups tomato sauce','1 tsp cumin','1 tsp paprika','Salt and pepper','For béchamel: 4 cups milk, 4 tbsp butter, 4 tbsp flour, 1/2 tsp nutmeg, salt, pepper','1 egg (optional, for béchamel)'],
+                instructions:['Cook pasta according to package, drain.','Brown meat with onion, add tomato sauce and spices, simmer.','Make béchamel: melt butter, add flour, whisk 2 minutes. Gradually add milk, whisk until thick. Season with nutmeg, salt, pepper. Optional: beat egg and stir into cooled béchamel.','In baking dish, layer half pasta, all meat, remaining pasta.','Pour béchamel over, spread evenly.','Bake at 375°F for 30-35 minutes until golden.','Let rest 10 minutes before serving.']
+            },
+            { 
+                name:'Molokhia', 
+                arabic:'ملوخية', 
+                description:'Rich green soup made from finely chopped jute leaves, served with rice and chicken or rabbit. An Egyptian national dish.',
+                time:'40 min', 
+                difficulty:'Medium', 
+                servings:'6 servings',
+                img:'Molokhia.jpeg',
+                emoji:'🥬', 
+                tags:['Medium','Oriental','Traditional'],
+                ingredients:['500g frozen molokhia (jute leaves), finely chopped','4 chicken pieces or rabbit','8 cups chicken broth','6 garlic cloves, minced','2 tbsp dried coriander','2 tbsp ghee or butter','Salt and pepper','2 cups white rice for serving'],
+                instructions:['Cook chicken in broth until tender. Remove chicken, shred meat, reserve broth.','Bring broth to boil, add frozen molokhia. Stir well.','In separate pan, fry garlic in ghee until golden, add coriander.','Pour garlic mixture into soup, simmer 5-10 minutes. Do not overcook.','Serve hot in bowls over rice, with chicken on side.','Optional: add a squeeze of lemon.']
+            },
+            { 
+                name:'Sheesh Tawook', 
+                arabic:'شيش طاووق', 
+                description:'Marinated chicken skewers grilled to perfection. A popular Middle Eastern street food and barbecue favorite.',
+                time:'30 min (plus marinating)', 
+                difficulty:'Easy', 
+                servings:'4 servings',
+                img:'Sheesh Tawook.jpeg',
+                emoji:'🍗', 
+                tags:['Easy','Oriental','Grilled'],
+                ingredients:['600g chicken breast, cubed','1 cup yogurt','3 garlic cloves, minced','2 tbsp lemon juice','2 tbsp olive oil','1 tsp paprika','1 tsp oregano','1/2 tsp cinnamon','Salt and pepper','Bell peppers and onions for skewering'],
+                instructions:['Mix yogurt, garlic, lemon, oil, and spices.','Add chicken, coat well. Marinate at least 4 hours or overnight.','Thread chicken onto skewers alternating with peppers and onions.','Preheat grill to medium-high.','Grill 5-7 minutes per side until chicken is cooked.','Serve with garlic sauce, pita, and grilled vegetables.']
+            },
+            { 
+                name:'Wara Enab', 
+                arabic:'ورق عنب', 
+                description:'Grape leaves stuffed with herbed rice and simmered in lemon-olive oil broth. A labor of love and a Mediterranean favorite.',
+                time:'90 min', 
+                difficulty:'Hard', 
+                servings:'6 servings',
+                img:'Wara Enab.jpeg',
+                emoji:'🍃', 
+                tags:['Hard','Oriental','Vegetarian Option'],
+                ingredients:['1 jar grape leaves (about 40-50 leaves)','2 cups short grain rice, rinsed','1 large onion, finely chopped','1/2 cup fresh parsley, chopped','1/4 cup fresh mint, chopped','1 tsp cinnamon','1 tsp allspice','Salt and pepper','1/2 cup olive oil','3 lemons, juiced','2 cups vegetable or chicken broth'],
+                instructions:['Rinse grape leaves, trim stems. Blanch in hot water if needed.','Mix rice, onion, herbs, spices, salt, pepper, and half the oil.','Place a leaf shiny side down, put small amount of filling near stem.','Fold sides over filling, roll tightly like a cigar.','Line pot with broken leaves, layer stuffed leaves snugly.','Pour remaining oil, lemon juice, and broth over.','Place an inverted plate on top to weigh down.','Simmer covered for 45-60 minutes until rice is cooked.','Let rest before serving. Serve with yogurt.']
+            }
+        ]
+    }
 // ========== Display categories by Marcelle ==========
 function displayCategories() {
     const container = document.getElementById('categoryIcons');
