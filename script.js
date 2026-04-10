@@ -727,3 +727,113 @@
             ]
         }
 };
+function saveCategories() {
+    localStorage.setItem('categories', JSON.stringify(categories));
+    renderCategoryIcons();
+    renderAllCategories();
+    updateCategoryFilter();
+    updateCommentRecipeFilter();
+}
+
+function renderCategoryIcons() {
+    let html = '';
+    for (let key in categories) {
+        if (categories[key]) {
+            html += `<div class = "category-icon-item" data - category = "${key}" >
+                <div class = "icon-circle"><i class = "${categories[key].icon}">< / i>< / div>
+                <span>${ categories[key].name }< / span>
+                < / div>`;
+        }
+    }
+    catIcons.innerHTML = html;
+
+    document.querySelectorAll('.category-icon-item').forEach(ic = >
+        ic.addEventListener('click', () = > showCategory(ic.dataset.category))
+    );
+}
+
+// ========== ADMIN CATEGORY MANAGEMENT ==========
+function loadAdminCategories() {
+    const list = document.getElementById('categoriesList');
+    if (!list) return;
+
+    let html = '';
+    let hasCategories = false;
+
+    for (let key in categories) {
+        if (categories[key] && categories[key].name) {
+            hasCategories = true;
+            const recipeCount = categories[key].dishes ? categories[key].dishes.length : 0;
+
+            html += `<div class = "admin-list-item" >
+                <div class = "admin-item-info">
+                <h4><i class = "${categories[key].icon || 'fas fa-utensils'}">< / i> ${ categories[key].name }< / h4>
+                <p>${ recipeCount } recipe${ recipeCount != = 1 ? 's' : '' }< / p>
+                < / div>
+                <div class = "admin-item-actions">
+                <button class = "admin-item-btn edit" onclick = "editCategory('${key}')"><i class = "fas fa-edit">< / i>< / button>
+                <button class = "admin-item-btn delete" onclick = "deleteCategory('${key}')"><i class = "fas fa-trash">< / i>< / button>
+                < / div>
+                < / div>`;
+        }
+    }
+
+    if (!hasCategories) {
+        list.innerHTML = '<p class="empty-favorites">No categories yet. Click "Add Category" to create one.</p>';
+    }
+    else {
+        list.innerHTML = html;
+    }
+}
+
+window.editCategory = function(key) {
+    document.getElementById('categoryModalTitle').textContent = 'Edit Category';
+    document.getElementById('categoryId').value = key;
+    document.getElementById('categoryName').value = categories[key].name;
+    document.getElementById('categoryIcon').value = categories[key].icon;
+    openModal('categoryModal');
+};
+
+window.deleteCategory = function(key) {
+    if (confirm(`Are you sure you want to delete category "${categories[key].name}" ? All recipes in this category will be deleted.`)) {
+        delete categories[key];
+        saveCategories();
+        loadAdminCategories();
+        loadAdminRecipes();
+        showNotif('Category deleted');
+    }
+};
+
+window.saveCategory = function() {
+    const id = document.getElementById('categoryId').value;
+    const name = document.getElementById('categoryName').value.trim();
+    let icon = document.getElementById('categoryIcon').value.trim();
+
+    if (!icon.startsWith('fas') && !icon.startsWith('far')) {
+        icon = 'fas fa-utensils';
+    }
+
+    const key = id || name.toLowerCase().replace(/ \s + / g, '');
+
+    categories[key] = {
+        name: name,
+        icon : icon,
+        dishes : categories[key] ? .dishes || []
+    };
+
+    saveCategories();
+    closeModal('categoryModal');
+    categoryForm.reset();
+    loadAdminCategories();
+    loadAdminRecipes();
+    showNotif(id ? 'Category updated' : 'Category added');
+};
+
+if (addCategoryBtn) {
+    addCategoryBtn.onclick = () = > {
+        document.getElementById('categoryModalTitle').textContent = 'Add Category';
+        document.getElementById('categoryId').value = '';
+        categoryForm.reset();
+        openModal('categoryModal');
+    };
+}
