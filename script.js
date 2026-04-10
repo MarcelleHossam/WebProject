@@ -15,6 +15,7 @@
     const welcome = document.querySelector('.categories-welcome');
     const detailPage = document.getElementById('recipeDetailPage');
     const backToCat = document.getElementById('backToCategoryBtn');
+    const detailFavBtn = document.getElementById('detailFavoriteBtn');
     const detailCat = document.getElementById('detailCategory');
     const detailTitle = document.getElementById('detailTitle');
     const detailArabic = document.getElementById('detailArabic');
@@ -25,8 +26,37 @@
     const detailDiff = document.getElementById('detailDifficulty');
     const ingList = document.getElementById('ingredientsList');
     const instrList = document.getElementById('instructionsList');
+    const commentForm = document.getElementById('commentForm');
+    const commentText = document.querySelector('#commentForm textarea');
+    const postComment = document.getElementById('postCommentBtn');
+    const signInLink = document.getElementById('signInToComment');
+    const loginPrompt = document.getElementById('loginPrompt');
+    const commentsDiv = document.getElementById('commentsList');
+    const commentCount = document.getElementById('commentCount');
+    const favBtn = document.getElementById('favoritesBtn');
+    const favDropdown = document.getElementById('favoritesDropdown');
+    const favList = document.getElementById('favoritesList');
+    const favCount = document.getElementById('favoritesCount');
+    const clearFav = document.getElementById('clearFavorites');
+    const editRecipeBtn = document.getElementById('editRecipeBtn');
+    const deleteRecipeBtn = document.getElementById('deleteRecipeBtn');
+    const adminRecipeActions = document.getElementById('adminRecipeActions');
 
-    // ========== ADMIN AUTHENTICATION ==========
+    // Admin Panel Elements
+    const adminPanel = document.getElementById('adminPanel');
+    const closeAdminBtn = document.getElementById('closeAdminBtn');
+    const adminTabs = document.querySelectorAll('.admin-tab');
+    const addCategoryBtn = document.getElementById('addCategoryBtn');
+    const addRecipeBtn = document.getElementById('addRecipeBtn');
+    const recipeCategoryFilter = document.getElementById('recipeCategoryFilter');
+    const commentRecipeFilter = document.getElementById('commentRecipeFilter');
+    const categoryModal = document.getElementById('categoryModal');
+    const recipeModal = document.getElementById('recipeModal');
+    const categoryForm = document.getElementById('categoryForm');
+    const recipeForm = document.getElementById('recipeForm');
+    const adminLoginModal = document.getElementById('adminLoginModal');
+
+    // ==========  Mark ADMIN AUTHENTICATION ==========
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'admin123';
     let isAdmin = false;
@@ -43,13 +73,29 @@
             loggedIn = true;
             user = { name: 'Admin User', isAdmin: true };
             closeModal('adminLoginModal');
+            updateCommentForm();
             updateAuthButtons();
             showMainApp(true);
+            showAdminPanel();
             showNotif('Welcome, Admin!');
         } else {
             document.getElementById('adminUsernameError').innerText = 'Invalid admin credentials';
         }
     };
+
+    function showAdminPanel() {
+        if (!isAdmin) return;
+        adminPanel.style.display = 'block';
+        loadAdminCategories();
+        loadAdminRecipes();
+        loadAdminComments();
+        updateCategoryFilter();
+        updateCommentRecipeFilter();
+    }
+
+    function hideAdminPanel() {
+        adminPanel.style.display = 'none';
+    }
 
     // ========== USER AUTHENTICATION ==========
     let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -61,13 +107,16 @@
 
     window.openModal = function(modalId) {
         document.getElementById(modalId).style.display = 'flex';
+        setTimeout(function() {
+            initPasswordToggles();
+        }, 150);
     };
 
     window.closeModal = function(modalId) {
         document.getElementById(modalId).style.display = 'none';
-        const form = document.querySelector(`#${modalId} form`);
+        const form = document.querySelector(#${modalId} form);
         if (form) form.reset();
-        const errors = document.querySelectorAll(`#${modalId} .error`);
+        const errors = document.querySelectorAll(#${modalId} .error);
         errors.forEach(e => e.innerText = '');
     };
 
@@ -152,10 +201,12 @@
         const userData = window.loggedInUser;
         loggedIn = true;
         user = { name: userData.name, email: userData.email };
+        updateCommentForm();
         updateAuthButtons();
         closeModal('loginModal');
         showMainApp(false);
-        showNotif(`Welcome back, ${user.name}!`);
+        showNotif(Welcome back, ${user.name}!);
+        updateFavDisplay();
     };
 
     window.handleSignOut = function() {
@@ -169,198 +220,10 @@
         catContainer.classList.remove('visible');
         welcome.style.display = 'block';
         backBtn.style.display = 'none';
+        adminPanel.style.display = 'none';
+        hideAdminRecipeActions();
         renderCategoryIcons();
+        updateCommentForm();
         updateAuthButtons();
         showNotif('You have been signed out.');
     };
-
-    // ========== CATEGORY DISPLAY FUNCTIONS (Placeholders) ==========
-    const categories = {};
-
-    function renderCategoryIcons() {
-        let html = '';
-        for (let key in categories) {
-            if (categories[key]) {
-                html += `<div class="category-icon-item" data-category="${key}">
-                    <div class="icon-circle"><i class="${categories[key].icon}"></i></div>
-                    <span>${categories[key].name}</span>
-                </div>`;
-            }
-        }
-        catIcons.innerHTML = html;
-        
-        document.querySelectorAll('.category-icon-item').forEach(ic => 
-            ic.addEventListener('click', () => showCategory(ic.dataset.category))
-        );
-    }
-
-    function showCategory(key) {
-        // Will be implemented by Marcelle and others
-    }
-
-    // ========== HELPER FUNCTIONS ==========
-    function updateAuthButtons() {
-        if (loggedIn) {
-            mainSignup.style.display = 'none';
-            mainLogin.style.display = 'none';
-            signOutBtn.style.display = 'inline-flex';
-            if (isAdmin) {
-                mainAdmin.style.display = 'none';
-            } else {
-                mainAdmin.style.display = 'inline-flex';
-            }
-        } else {
-            mainSignup.style.display = 'inline-flex';
-            mainLogin.style.display = 'inline-flex';
-            mainAdmin.style.display = 'inline-flex';
-            signOutBtn.style.display = 'none';
-        }
-    }
-
-    function showMainApp(asAdmin) {
-        hero.style.display = 'none';
-        signin.style.display = 'none';
-        mainApp.style.display = 'block';
-        setTimeout(() => mainApp.style.opacity = '1', 30);
-    }
-
-    function showNotif(msg) {
-        const n = document.createElement('div');
-        n.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#ffd8b0;color:#4a2f1f;padding:15px 25px;border-radius:50px;box-shadow:0 5px 15px rgba(0,0,0,0.2);z-index:2000;font-weight:600;border:2px solid #ca9f7c;animation:slideIn 0.3s ease;';
-        n.textContent = msg;
-        document.body.appendChild(n);
-        setTimeout(() => {
-            n.style.animation = 'slideIn 0.3s ease reverse';
-            setTimeout(() => {
-                if (n.parentNode) document.body.removeChild(n);
-            }, 300);
-        }, 3000);
-    }
-
-    // ========== EVENT LISTENERS ==========
-    if (signupBtn) signupBtn.onclick = () => openModal('signupModal');
-    if (loginBtn) loginBtn.onclick = () => openModal('loginModal');
-    if (mainSignup) mainSignup.onclick = () => openModal('signupModal');
-    if (mainLogin) mainLogin.onclick = () => openModal('loginModal');
-    if (signOutBtn) signOutBtn.onclick = handleSignOut;
-    if (mainAdmin) mainAdmin.onclick = () => openModal('adminLoginModal');
-    if (adminLink) {
-        adminLink.onclick = (e) => {
-            e.preventDefault();
-            openModal('adminLoginModal');
-        };
-    }
-
-    window.onclick = function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = 'none';
-        }
-    };
-
-    // Add slideIn animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Initial UI setup
-    renderCategoryIcons();
-    updateAuthButtons();
-})();
-
-
-// ========== PASSWORD SHOW/HIDE FUNCTIONALITY ==========
-function initPasswordToggles() {
-    // Find all password fields
-    const passwordFields = document.querySelectorAll('input[type="password"]');
-    
-    passwordFields.forEach(field => {
-        // Skip if already has a toggle
-        if (field.hasAttribute('data-toggle-initialized')) return;
-        field.setAttribute('data-toggle-initialized', 'true');
-        
-        // Find or create wrapper
-        let wrapper = field.closest('.password-field-wrapper');
-        if (!wrapper) {
-            wrapper = document.createElement('div');
-            wrapper.className = 'password-field-wrapper';
-            field.parentNode.insertBefore(wrapper, field);
-            wrapper.appendChild(field);
-        }
-        
-        // Remove existing toggle if any
-        const existingToggle = wrapper.querySelector('.password-toggle-btn');
-        if (existingToggle) existingToggle.remove();
-        
-        // Create toggle button
-        const toggleBtn = document.createElement('button');
-        toggleBtn.type = 'button';
-        toggleBtn.className = 'password-toggle-btn';
-        toggleBtn.innerHTML = '<i class="far fa-eye-slash"></i>';
-        toggleBtn.setAttribute('title', 'Show password');
-        toggleBtn.setAttribute('aria-label', 'Show password');
-        
-        // Toggle function
-        toggleBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (field.type === 'password') {
-                field.type = 'text';
-                this.innerHTML = '<i class="far fa-eye"></i>';
-                this.setAttribute('title', 'Hide password');
-            } else {
-                field.type = 'password';
-                this.innerHTML = '<i class="far fa-eye-slash"></i>';
-                this.setAttribute('title', 'Show password');
-            }
-            field.focus();
-        });
-        
-        wrapper.appendChild(toggleBtn);
-    });
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    initPasswordToggles();
-});
-
-// Also initialize when modals open
-const originalOpenModal = window.openModal;
-window.openModal = function(modalId) {
-    if (originalOpenModal) originalOpenModal(modalId);
-    setTimeout(initPasswordToggles, 50);
-};
-
-// Watch for dynamically added forms
-const observer = new MutationObserver(function(mutations) {
-    let needsInit = false;
-    mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList' && mutation.addedNodes.length) {
-            mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1 && node.querySelector) {
-                    if (node.querySelector('input[type="password"]')) {
-                        needsInit = true;
-                    }
-                }
-            });
-        }
-    });
-    if (needsInit) {
-        setTimeout(initPasswordToggles, 50);
-    }
-});
-
-observer.observe(document.body, {
-    childList: true,
-    subtree: true
-});
-
-window.addEventListener('load', function() {
-    initPasswordToggles();
-});
