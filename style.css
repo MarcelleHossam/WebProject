@@ -969,3 +969,194 @@ footer {
     background-color: rgba(255, 216, 176, 0.3);
 }
 
+/* ========== FAVORITES SYSTEM ========== */
+.favorites-container {
+    position: relative;
+    display: inline-block;
+}
+
+.favorites-btn {
+    background-color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a3729;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #ffeada;
+    position: relative;
+}
+
+.favorites-btn i {
+    color: #ff4d4d;
+    font-size: 1.2rem;
+}
+
+.favorites-count {
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+.favorites-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 20px;
+    min-width: 300px;
+    max-width: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    border: 2px solid #ffd8b0;
+    margin-top: 10px;
+}
+
+.favorites-dropdown.show {
+    display: block;
+}
+
+.favorites-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed #e4c2a2;
+}
+
+.favorites-header h3 {
+    font-size: 1.3rem;
+    color: #4a2f1f;
+}
+
+.clear-favorites {
+    background: none;
+    border: none;
+    color: #ff884d;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.favorites-list {
+    list-style: none;
+}
+
+.favorite-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #f5deca;
+}
+
+.favorite-item:last-child {
+    border-bottom: none;
+}
+
+.favorite-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.favorite-name {
+    font-weight: 600;
+    color: #4a2f1f;
+}
+
+.favorite-category {
+    font-size: 0.8rem;
+    color: #b45f2e;
+}
+
+.remove-favorite {
+    background: none;
+    border: none;
+    color: #ff884d;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.empty-favorites {
+    text-align: center;
+    color: #ab8a70;
+    padding: 20px;
+    font-style: italic;
+}
+
+.detail-favorite-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: white;
+    border: 2px solid #ffd8b0;
+    padding: 12px 25px;
+    border-radius: 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a3729;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.detail-favorite-btn i {
+    color: #ff4d4d;
+    font-size: 1.3rem;
+}
+
+.detail-favorite-btn:hover {
+    background-color: #ffe1c6;
+    transform: scale(1.05);
+}
+
+.detail-favorite-btn.active {
+    background-color: #ffe1c6;
+}
+
+.favorite-icon {
+    color: #ff884d;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    border-top: 1px dashed #e4c2a2;
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.favorite-icon i {
+    font-size: 1.3rem;
+}
+
+.favorite-icon:hover {
+    color: #ff4d4d;
+}
+
+.favorite-icon.active {
+    color: #ff4d4d;
+}
+
+.favorite-icon.active i {
+    font-weight: 900;
+}
