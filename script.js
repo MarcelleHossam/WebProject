@@ -56,7 +56,7 @@
     const recipeForm = document.getElementById('recipeForm');
     const adminLoginModal = document.getElementById('adminLoginModal');
 
-    // ==========  Mark ADMIN AUTHENTICATION ==========
+    
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'admin123';
     let isAdmin = false;
