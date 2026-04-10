@@ -477,4 +477,253 @@
                 }
             ]
         },
-        
+            // ========== Malak desserts recipes section  =========
+        desserts: {
+            name: 'Desserts',
+            icon : 'fas fa-candy-cane',
+            dishes : [
+                {
+                    name:'Baklava',
+                    arabic : 'بقلاوة',
+                    description : 'Layers of thin phyllo dough filled with chopped nuts and sweetened with syrup or honey.',
+                    time : '45 min',
+                    difficulty : 'Medium',
+                    servings : '12 pieces',
+                    img : 'Baklava.jpeg',
+                    emoji : '🍯',
+                    tags : ['Medium','Oriental','Syrup'] ,
+                    ingredients : ['1 package phyllo dough','2 cups mixed nuts (walnuts, pistachios)','1 cup butter, melted','1 tsp cinnamon','1 cup sugar','1 cup water','1 tbsp lemon juice','1 tsp rose water'] ,
+                    instructions : ['Layer phyllo in buttered pan, brushing each layer with butter.','Sprinkle nut mixture every few layers.','Cut into diamonds before baking.','Bake at 350°F for 30-35 minutes until golden.','Boil sugar, water, lemon for syrup, add rose water.','Pour cold syrup over hot baklava. Let absorb.']
+                },
+                {
+                    name:'Basbousa',
+                    arabic : 'بسبوسة',
+                    description : 'Soft and moist semolina cake soaked in sweet syrup, often topped with coconut or almonds.',
+                    time : '35 min',
+                    difficulty : 'Easy',
+                    servings : '12 pieces',
+                    img : 'Basbousa.jpeg',
+                    emoji : '🍰',
+                    tags : ['Easy','Oriental','Sweet'] ,
+                    ingredients : ['2 cups semolina','1 cup sugar','1 cup yogurt','1/2 cup coconut flakes','1/2 cup butter, melted','1 tsp baking powder','1 tsp vanilla','Syrup: 2 cups sugar, 1 cup water, 1 lemon'] ,
+                    instructions : ['Mix semolina, sugar, coconut, baking powder.','Add yogurt, butter, vanilla, mix well.','Pour into greased pan, smooth top.','Bake at 350°F for 30 minutes.','Boil syrup ingredients, pour over hot basbousa.','Let cool, cut into squares.']
+                },
+                {
+                    name:'Kahk',
+                    arabic : 'كحك',
+                    description : 'Traditional buttery cookies filled with dates or nuts, dusted with powdered sugar, especially for Eid.',
+                    time : '50 min',
+                    difficulty : 'Medium',
+                    servings : '24 cookies',
+                    img : 'Kahk.png',
+                    emoji : '🍪',
+                    tags : ['Medium','Oriental','Holiday'] ,
+                    ingredients : ['4 cups flour','2 cups butter, softened','1 cup powdered sugar','1 tbsp sesame seeds','1 tsp vanilla','1 tsp baking powder','1/2 cup date paste or nuts for filling'] ,
+                    instructions : ['Cream butter and sugar until fluffy.','Add vanilla, mix.','Add flour gradually until dough forms.','Take small pieces, stuff with dates or nuts.','Shape into balls or rings.','Bake at 350°F for 20 minutes until pale golden.','Dust with powdered sugar while warm.']
+                },
+                {
+                    name:'Kunafa',
+                    arabic : 'كنافة',
+                    description : 'Shredded phyllo pastry layered with sweet cheese and soaked in rose-scented syrup.',
+                    time : '50 min',
+                    difficulty : 'Hard',
+                    servings : '10 pieces',
+                    img : 'kunafa.jpeg',
+                    emoji : '🍮',
+                    tags : ['Hard','Oriental','Decadent'] ,
+                    ingredients : ['500g kunafa dough (shredded phyllo)','250g butter, melted','500g sweet cheese (mozzarella + akkawi)','1/2 cup crushed pistachios','Syrup: 2 cups sugar, 1 cup water, 1 tsp rose water', '1 tsp orange blossom water'] ,
+                    instructions : ['Shred kunafa dough finely, mix with melted butter.','Press half into pan, add cheese layer.','Cover with remaining dough, press firmly.','Bake at 375°F for 35 minutes until golden.','Pour cold syrup over hot kunafa immediately.','Garnish with pistachios.']
+                },
+                {
+                    name:'Molten Cake',
+                    arabic : 'كيكة مولتن',
+                    description : 'Warm chocolate cake with a liquid chocolate center that flows when cut.',
+                    time : '25 min',
+                    difficulty : 'Medium',
+                    servings : '6 cakes',
+                    img : 'molten cake.jpeg',
+                    emoji : '🍫',
+                    tags : ['Medium','Chocolate','Decadent'] ,
+                    ingredients : ['200g dark chocolate','1/2 cup butter','3 eggs','1/2 cup sugar','1/4 cup flour','1 tsp vanilla','Pinch of salt'] ,
+                    instructions : ['Melt chocolate and butter together.','Beat eggs and sugar until pale.','Fold in flour, then chocolate mixture.','Pour into greased ramekins.','Bake at 425°F for 12-14 minutes.','Let rest 1 minute, then invert onto plates.','Serve immediately with ice cream.']
+                },
+                {
+                    name:'Om Ali',
+                    arabic : 'أم علي',
+                    description : 'Egyptian bread pudding with milk, nuts, and raisins, baked until golden and creamy.',
+                    time : '30 min',
+                    difficulty : 'Easy',
+                    servings : '8 servings',
+                    img : 'Om Ali.png',
+                    emoji : '🥣',
+                    tags : ['Easy','Oriental','Comfort'] ,
+                    ingredients : ['1 package puff pastry or croissants','4 cups milk','1 cup sugar','1/2 cup raisins','1/2 cup coconut flakes','1/2 cup mixed nuts','1 tsp vanilla','1/2 cup cream'] ,
+                    instructions : ['Bake pastry until golden, break into pieces.','Heat milk, sugar, vanilla.','Layer pastry, nuts, raisins, coconut in dish.','Pour hot milk over, let soak.','Bake at 350°F for 15 minutes.','Drizzle with cream, broil 2 minutes until golden.']
+                },
+                {
+                    name:'Qatayef',
+                    arabic : 'قطايف',
+                    description : 'Stuffed semolina pancakes, fried or baked, soaked in syrup - popular during Ramadan.',
+                    time : '40 min',
+                    difficulty : 'Medium',
+                    servings : '8 pieces',
+                    img : 'Qatayef.jpeg',
+                    emoji : '🥟',
+                    tags : ['Medium','Oriental','Ramadan'] ,
+                    ingredients : ['2 cups semolina','1/2 cup flour','2 cups water','1 tbsp sugar','1 tsp yeast','1/2 tsp salt','Filling: 2 cups nuts, 1/2 cup sugar, 1 tsp cinnamon','Oil for frying','Syrup: 2 cups sugar, 1 cup water, 1 lemon'] ,
+                    instructions : ['Mix dry ingredients, add water, let rest 30 minutes.','Cook small pancakes on one side only.','Fill with nut mixture, seal edges.','Fry until golden or bake.','Dip in cold syrup.']
+                },
+                {
+                    name:'Roz Bel Laban',
+                    arabic : 'رز باللبن',
+                    description : 'Creamy rice pudding flavored with vanilla, topped with cinnamon and nuts.',
+                    time : '30 min',
+                    difficulty : 'Easy',
+                    servings : '6 servings',
+                    img : 'Roz Bel Laban.png',
+                    emoji : '🥛',
+                    tags : ['Easy','Oriental','Comfort'] ,
+                    ingredients : ['1/2 cup short grain rice','4 cups milk','1/2 cup sugar','1 tsp vanilla','Cinnamon powder','Chopped nuts for garnish'] ,
+                    instructions : ['Wash rice, soak for 30 minutes, drain.','Cook rice with milk until soft and creamy.','Add sugar and vanilla, cook until thickened.','Pour into serving bowls.','Chill for 2 hours.','Sprinkle with cinnamon and nuts before serving.']
+                },
+                {
+                    name:'Zalabya',
+                    arabic : 'زلابيا',
+                    description : 'Crispy fried dough fritters soaked in sweet syrup, light and fluffy inside.',
+                    time : '30 min',
+                    difficulty : 'Medium',
+                    servings : '6 pieces',
+                    img : 'Zalabya.jpeg',
+                    emoji : '🍩',
+                    tags : ['Medium','Oriental','Fried'] ,
+                    ingredients : ['2 cups flour','1 tbsp yeast','1 tbsp sugar','1/2 tsp salt','1 cup warm water','Syrup: 2 cups sugar, 1 cup water, 1 lemon','Oil for frying'] ,
+                    instructions : ['Mix yeast with warm water and sugar, let foam.','Add flour, salt, mix into sticky dough.','Cover, let rise 1 hour.','Heat oil, drop spoonfuls of dough.','Fry until golden on both sides.','Dip in cold syrup while hot.']
+                }
+            ]
+        },
+
+    // ========== Malak street recipes section  =========
+        street: {
+            name: 'Street Food',
+            icon : 'fas fa-truck',
+            dishes : [
+                {
+                    name:'Classic Burger',
+                    arabic : 'برجر كلاسيك',
+                    description : 'Juicy beef patty with melted cheese, fresh lettuce, tomato, and our special sauce in a soft brioche bun. The ultimate street food classic.',
+                    time : '25 min',
+                    difficulty : 'Easy',
+                    servings : '4 burgers',
+                    img : 'Classic Burger.jpeg',
+                    emoji : '🍔',
+                    tags : ['Easy','Quick','Comfort Food'] ,
+                    ingredients : ['500g ground beef (80/20)','4 brioche burger buns','4 slices cheddar cheese','1 lettuce, leaves separated','2 tomatoes, sliced','1 onion, sliced','Pickles','Salt and pepper','2 tbsp butter','For sauce: 1/2 cup mayo, 2 tbsp ketchup, 1 tbsp mustard, 1 tsp paprika'] ,
+                    instructions : ['Divide beef into 4 patties, season with salt and pepper.','Mix sauce ingredients in a small bowl.','Heat grill or skillet, cook patties 3-4 minutes per side.','Add cheese in last minute, cover to melt.','Toast buns with butter.','Spread sauce on bottom bun, layer lettuce, tomato, onion, pickles, patty.','Close burger, serve with fries.']
+                },
+                {
+                    name:'Egyptian Shawarma',
+                    arabic : 'شاورما مصري',
+                    description : 'Marinated chicken or beef stacked and grilled, then shaved and wrapped in pita with garlic sauce and pickles. Egyptian street food at its best.',
+                    time : '30 min (plus marinating)',
+                    difficulty : 'Medium',
+                    servings : '4 wraps',
+                    img : 'Egyptian Shawarma.jpeg',
+                    emoji : '🌯',
+                    tags : ['Medium','Oriental','Street Food'] ,
+                    ingredients : ['600g chicken thighs or beef strips','1 cup yogurt','3 garlic cloves, minced','2 tbsp vinegar','1 tsp cumin','1 tsp paprika','1/2 tsp cinnamon','1/2 tsp cardamom','Salt and pepper','Pita bread','Garlic sauce','Pickles','French fries'] ,
+                    instructions : ['For marinade: mix yogurt, garlic, vinegar, and spices.','Add meat, coat well. Marinate 4 hours or overnight.','Heat large skillet or grill, cook meat until charred and cooked.','Warm pita bread, spread garlic sauce.','Layer meat, pickles, and fries.','Roll tightly, wrap in foil.','Serve immediately.']
+                },
+                {
+                    name:'Foul Medames',
+                    arabic : 'فول مدمس',
+                    description : 'Slow-cooked fava beans seasoned with garlic, lemon, and cumin, served with olive oil and fresh vegetables. A staple Egyptian breakfast and street food.',
+                    time : '15 min',
+                    difficulty : 'Easy',
+                    servings : '4 servings',
+                    img : 'Foul Medames.jpeg',
+                    emoji : '🫘',
+                    tags : ['Easy','Oriental','Breakfast'] ,
+                    ingredients : ['2 cans fava beans','4 garlic cloves, minced','1 lemon, juiced','1 tsp cumin','Salt to taste','1/4 cup olive oil','Fresh parsley, chopped','2 tomatoes, diced','1 onion, diced','Pita bread for serving'] ,
+                    instructions : ['Heat fava beans in a pot until hot.','Mash garlic with salt, add to beans.','Stir in cumin and lemon juice.','Transfer to serving bowl, drizzle with olive oil.','Top with parsley, tomatoes, and onion.','Serve with pita bread and tahini.']
+                },
+                {
+                    name:'Hotdog',
+                    arabic : 'هوت دوج',
+                    description : 'Grilled beef frankfurter nestled in a soft bun, topped with mustard, ketchup, and crispy fried onions. Classic street food favorite.',
+                    time : '10 min',
+                    difficulty : 'Easy',
+                    servings : '4 hotdogs',
+                    img : 'Hotdog.jpeg',
+                    emoji : '🌭',
+                    tags : ['Easy','Quick','Kids Favorite'] ,
+                    ingredients : ['4 beef frankfurters','4 hotdog buns','Mustard','Ketchup','1 onion, thinly sliced and fried until crispy','Pickle relish or sliced pickles'] ,
+                    instructions : ['Grill or boil frankfurters until heated through.','Toast buns lightly.','Place frankfurter in bun.','Top with mustard, ketchup, crispy onions, and pickles.','Serve immediately with fries.']
+                },
+                {
+                    name:'Kebda',
+                    arabic : 'كبدة',
+                    description : 'Spiced sautéed beef liver with bell peppers, onions, and garlic, served in baladi bread with tahini. A legendary Egyptian street food.',
+                    time : '20 min',
+                    difficulty : 'Easy',
+                    servings : '4 sandwiches',
+                    img : 'Kebda.jpeg',
+                    emoji : '🥪',
+                    tags : ['Easy','Oriental','Quick'] ,
+                    ingredients : ['500g beef liver, sliced thin','2 bell peppers, sliced','1 large onion, sliced','4 garlic cloves, minced','2 tbsp vinegar','1 tsp cumin','1/2 tsp chili powder','Salt and pepper','3 tbsp oil','Baladi bread or rolls','Tahini sauce for serving'] ,
+                    instructions : ['Season liver with salt, pepper, and cumin.','Heat oil in large skillet over high heat.','Add liver in single layer, sear 1-2 minutes per side. Remove.','In same pan, sauté onions and peppers until soft.','Add garlic, cook 1 minute.','Return liver to pan, add vinegar and chili. Toss well.','Serve in bread with tahini sauce.']
+                },
+                {
+                    name:'Koshary',
+                    arabic : 'كشري',
+                    description : 'Egyptian national dish - layers of rice, lentils, macaroni, and chickpeas topped with spicy tomato sauce and crispy fried onions. The ultimate street food.',
+                    time : '45 min',
+                    difficulty : 'Medium',
+                    servings : '6 servings',
+                    img : 'Koshary.jpeg',
+                    emoji : '🍛',
+                    tags : ['Medium','Oriental','Vegetarian'] ,
+                    ingredients : ['1 cup rice','1 cup brown lentils','1 cup macaroni','1 can chickpeas, drained','2 large onions, thinly sliced','4 garlic cloves, minced','2 cups tomato sauce','2 tbsp vinegar','1 tsp cumin','1 tsp chili flakes','Salt and pepper','Oil for frying'] ,
+                    instructions : ['Cook lentils in boiling water until tender, about 20 minutes. Drain.','Cook rice according to package.','Cook macaroni according to package.','Fry onions until crispy and golden. Set aside.','For sauce: sauté garlic, add tomato sauce, vinegar, cumin, chili, salt. Simmer 10 minutes.','Layer in serving dish: rice, lentils, macaroni, chickpeas.','Top with tomato sauce and crispy onions. Serve.']
+                },
+                {
+                    name:'Pizza',
+                    arabic : 'بيتزا',
+                    description : 'Classic Margherita pizza with homemade tomato sauce, fresh mozzarella, and basil. A universal street food favorite.',
+                    time : '25 min',
+                    difficulty : 'Easy',
+                    servings : '2 pizzas',
+                    img : 'Pizza.jpeg',
+                    emoji : '🍕',
+                    tags : ['Easy','Italian','Comfort Food'] ,
+                    ingredients : ['2 pizza dough balls','1 cup tomato sauce','200g fresh mozzarella, sliced','Fresh basil leaves','Olive oil','Salt and pepper','Optional toppings: pepperoni, mushrooms, olives'] ,
+                    instructions : ['Preheat oven to highest setting (500°F) with pizza stone if available.','Roll out dough on floured surface.','Spread tomato sauce, leaving border.','Arrange mozzarella slices.','Drizzle with olive oil, season with salt and pepper.','Bake 10-12 minutes until crust is golden and cheese bubbles.','Top with fresh basil. Slice and serve.']
+                },
+                {
+                    name:'Sojok',
+                    arabic : 'سجق',
+                    description : 'Spicy Egyptian beef sausages grilled and served in a baguette with tahini sauce and grilled peppers. Popular street food snack.',
+                    time : '20 min',
+                    difficulty : 'Easy',
+                    servings : '4 sandwiches',
+                    img : 'Sojok.jpeg',
+                    emoji : '🌭',
+                    tags : ['Easy','Oriental','Spicy'] ,
+                    ingredients : ['8 sojok sausages (spicy Egyptian beef sausages)','4 baguettes or long rolls','2 bell peppers, sliced','1 onion, sliced','2 tbsp oil','Tahini sauce','Lemon juice','Parsley for garnish'] ,
+                    instructions : ['Heat oil in skillet, add sausages. Cook until browned and cooked through.','In same pan, sauté peppers and onions until soft.','Warm baguettes.','Spread tahini sauce inside bread.','Layer sausages, peppers, and onions.','Sprinkle with lemon juice and parsley.','Serve hot.']
+                },
+                {
+                    name:'Tamiya',
+                    arabic : 'طعمية',
+                    description : 'Egyptian falafel made from fava beans, herbs, and spices, fried to golden perfection. Served in pita with fresh vegetables and tahini.',
+                    time : '30 min',
+                    difficulty : 'Medium',
+                    servings : '8 pieces',
+                    img : 'Tamiya.jpeg',
+                    emoji : '🟢',
+                    tags : ['Medium','Oriental','Vegetarian'] ,
+                    ingredients : ['2 cups dried split fava beans','1 large onion, quartered','4 garlic cloves','1 bunch parsley','1 bunch cilantro','1 tsp cumin','1 tsp coriander','1 tsp baking soda','Salt and pepper','Oil for frying','Pita bread, tomatoes, onions, tahini for serving'] ,
+                    instructions : ['Soak fava beans overnight, drain well.','In food processor, grind beans with onion, garlic, herbs, and spices until smooth paste.','Add baking soda, mix well. Let rest 30 minutes.','Shape into small patties.','Heat oil to 350°F, fry until golden brown and crispy.','Drain on paper towels.','Serve in pita with tomatoes, onions, and tahini.']
+                }
+            ]
+        }
+};
