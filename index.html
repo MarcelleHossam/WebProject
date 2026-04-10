@@ -80,9 +80,22 @@
                     </div>
                     <span class="site-name arabic-title">ست الكل</span>
                 </div>
-                <div class="user-actions">
-
-                    
+                                <div class="user-actions">
+                    <div class="favorites-container">
+                        <button class="favorites-btn" id="favoritesBtn">
+                            <i class="fas fa-heart"></i> Favorites
+                            <span class="favorites-count" id="favoritesCount">0</span>
+                        </button>
+                        <div class="favorites-dropdown" id="favoritesDropdown">
+                            <div class="favorites-header">
+                                <h3>Your Favorite Recipes</h3>
+                                <button class="clear-favorites" id="clearFavorites">Clear all</button>
+                            </div>
+                            <div class="favorites-list" id="favoritesList">
+                                <div class="empty-favorites">No favorites yet. Start saving recipes!</div>
+                            </div>
+                        </div>
+                    </div>
                     <button class="auth-btn" id="mainSignupBtn"><i class="fas fa-user-plus"></i> Sign up</button>
                     <button class="auth-btn" id="mainLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
                     <button class="auth-btn" id="mainAdminBtn"><i class="fas fa-crown"></i> Admin</button>
@@ -110,8 +123,10 @@
                     <button class="back-to-category" id="backToCategoryBtn">
                         <i class="fas fa-arrow-left"></i> Back
                     </button>
-                    <div class="detail-actions">
-                        <!-- Favorite button  -->
+                                        <div class="detail-actions">
+                        <button class="detail-favorite-btn" id="detailFavoriteBtn">
+                            <i class="far fa-heart"></i> Add to Favorites
+                        </button>
                     </div>
                 </div>
                 <div class="detail-header-section">
