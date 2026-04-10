@@ -754,7 +754,7 @@
         );
     }
 
-    // ========== ADMIN CATEGORY MANAGEMENT ==========
+    // ==========  ADMIN CATEGORY MANAGEMENT ==========
     function loadAdminCategories() {
         const list = document.getElementById('categoriesList');
         if (!list) return;
@@ -839,7 +839,7 @@
         };
     }
 
-    // ==========  MARK ADMIN RECIPE MANAGEMENT ==========
+    // ========== ADMIN RECIPE MANAGEMENT ==========
     function loadAdminRecipes() {
         const list = document.getElementById('recipesList');
         if (!list) return;
@@ -1004,4 +1004,125 @@
 
     if (recipeCategoryFilter) {
         recipeCategoryFilter.addEventListener('change', loadAdminRecipes);
+    }
+
+    // ==========   ADMIN COMMENT MANAGEMENT ==========
+    let comments = JSON.parse(localStorage.getItem('recipeComments')) || {};
+
+    function saveComments() {
+        localStorage.setItem('recipeComments', JSON.stringify(comments));
+        loadAdminComments();
+        if (currentRecipe) updateCommentsUI();
+    }
+
+    function loadAdminComments() {
+        const list = document.getElementById('commentsList');
+        if (!list) return;
+        const filter = commentRecipeFilter?.value || '';
+        let html = '';
+        let hasComments = false;
+        
+        for (let recipeKey in comments) {
+            if (filter && recipeKey !== filter) continue;
+            
+            comments[recipeKey].forEach((comment, index) => {
+                hasComments = true;
+                const [cat, recipeName] = recipeKey.split('_');
+                html += `<div class="admin-list-item">
+                    <div class="admin-item-info">
+                        <h4>${comment.author} <small>on ${recipeName}</small></h4>
+                        <p>${comment.text.substring(0, 60)}...</p>
+                        <p><small>${comment.date} • ${comment.likes || 0} likes • ${comment.replies?.length || 0} replies</small></p>
+                    </div>
+                    <div class="admin-item-actions">
+                        <button class="admin-item-btn reply" onclick="showReplyForm('${recipeKey}', ${index})"><i class="fas fa-reply"></i></button>
+                        <button class="admin-item-btn delete" onclick="deleteAdminComment('${recipeKey}', ${index})"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`;
+                
+                if (comment.replies) {
+                    comment.replies.forEach((reply, replyIndex) => {
+                        html += `<div class="admin-list-item" style="margin-left: 30px; background-color: #faf0e6;">
+                            <div class="admin-item-info">
+                                <h4><i class="fas fa-reply"></i> ${reply.author} replied</h4>
+                                <p>${reply.text.substring(0, 60)}...</p>
+                                <p><small>${reply.date}</small></p>
+                            </div>
+                            <div class="admin-item-actions">
+                                <button class="admin-item-btn delete" onclick="deleteAdminReply('${recipeKey}', ${index}, ${replyIndex})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>`;
+                    });
+                }
+            });
+        }
+        
+        if (!hasComments) {
+            list.innerHTML = '<p class="empty-favorites">No comments yet</p>';
+        } else {
+            list.innerHTML = html;
+        }
+    }
+
+    function updateCommentRecipeFilter() {
+        if (!commentRecipeFilter) return;
+        
+        let options = '<option value="">All Recipes</option>';
+        
+        for (let key in categories) {
+            if (categories[key] && categories[key].dishes) {
+                categories[key].dishes.forEach(recipe => {
+                    if (recipe && recipe.name) {
+                        const recipeKey = key + '_' + recipe.name;
+                        options += `<option value="${recipeKey}">${recipe.name} (${categories[key].name})</option>`;
+                    }
+                });
+            }
+        }
+        
+        commentRecipeFilter.innerHTML = options;
+    }
+
+    window.deleteAdminComment = function(recipeKey, commentIndex) {
+        if (confirm('Delete this comment?')) {
+            comments[recipeKey].splice(commentIndex, 1);
+            if (comments[recipeKey].length === 0) {
+                delete comments[recipeKey];
+            }
+            saveComments();
+            showNotif('Comment deleted');
+        }
+    };
+
+    window.deleteAdminReply = function(recipeKey, commentIndex, replyIndex) {
+        if (confirm('Delete this reply?')) {
+            comments[recipeKey][commentIndex].replies.splice(replyIndex, 1);
+            saveComments();
+            showNotif('Reply deleted');
+        }
+    };
+
+    window.showReplyForm = function(recipeKey, commentIndex) {
+        const replyText = prompt('Enter your reply:');
+        if (replyText && replyText.trim()) {
+            if (!comments[recipeKey][commentIndex].replies) {
+                comments[recipeKey][commentIndex].replies = [];
+            }
+            
+            comments[recipeKey][commentIndex].replies.push({
+                id: Date.now(),
+                author: 'Admin User',
+                authorInitial: 'A',
+                text: replyText.trim(),
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                isAdmin: true
+            });
+            
+            saveComments();
+            showNotif('Reply added');
+        }
+    };
+
+    if (commentRecipeFilter) {
+        commentRecipeFilter.addEventListener('change', loadAdminComments);
     }
