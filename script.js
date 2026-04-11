@@ -1600,5 +1600,36 @@
             }, 300);
         }, 3000);
     }
+        // ========== EVENT LISTENERS ==========
+    if (signupBtn) signupBtn.onclick = () => openModal('signupModal');
+    if (loginBtn) loginBtn.onclick = () => openModal('loginModal');
+    if (mainSignup) mainSignup.onclick = () => openModal('signupModal');
+    if (mainLogin) mainLogin.onclick = () => openModal('loginModal');
+    if (signOutBtn) signOutBtn.onclick = handleSignOut;
+    if (mainAdmin) mainAdmin.onclick = () => openModal('adminLoginModal');
+    if (adminLink) {
+        adminLink.onclick = (e) => {
+            e.preventDefault();
+            openModal('adminLoginModal');
+        };
+    }
+
+    if (closeAdminBtn) {
+        closeAdminBtn.onclick = hideAdminPanel;
+    }
+
+    if (signInLink) {
+        signInLink.onclick = (e) => {
+            e.preventDefault();
+            openModal('loginModal');
+        };
+    }
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    };
+
 
     }
