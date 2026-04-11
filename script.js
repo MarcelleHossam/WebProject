@@ -1631,5 +1631,42 @@
         }
     };
 
+// ========== FIXED ADMIN TABS ==========
+    if (adminTabs && adminTabs.length > 0) {
+        adminTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                adminTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const tabName = this.dataset.tab;
+                
+                document.querySelectorAll('.admin-tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                const contentId = 'admin' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
+                const selectedContent = document.getElementById(contentId);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                    
+                    if (tabName === 'categories') {
+                        loadAdminCategories();
+                    } else if (tabName === 'recipes') {
+                        loadAdminRecipes();
+                        updateCategoryFilter();
+                    } else if (tabName === 'comments') {
+                        loadAdminComments();
+                        updateCommentRecipeFilter();
+                    }
+                }
+            });
+        });
+        
+        setTimeout(() => {
+            if (adminTabs[0]) {
+                adminTabs[0].click();
+            }
+        }, 100);
+    }
 
     }
