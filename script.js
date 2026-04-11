@@ -1548,4 +1548,57 @@
                 alert('Write something.');
             }
         };
+        // ========== HELPER FUNCTIONS ==========
+    function updateCommentForm() {
+        if (loggedIn) {
+            loginPrompt.style.display = 'none';
+            postComment.style.display = 'block';
+            commentText.disabled = false;
+            commentText.placeholder = 'Write your comment...';
+        } else {
+            loginPrompt.style.display = 'block';
+            postComment.style.display = 'none';
+            commentText.disabled = true;
+            commentText.placeholder = 'Please sign in to leave a comment';
+        }
+    }
+
+    function updateAuthButtons() {
+        if (loggedIn) {
+            mainSignup.style.display = 'none';
+            mainLogin.style.display = 'none';
+            signOutBtn.style.display = 'inline-flex';
+            if (isAdmin) {
+                mainAdmin.style.display = 'none';
+            } else {
+                mainAdmin.style.display = 'inline-flex';
+            }
+        } else {
+            mainSignup.style.display = 'inline-flex';
+            mainLogin.style.display = 'inline-flex';
+            mainAdmin.style.display = 'inline-flex';
+            signOutBtn.style.display = 'none';
+        }
+    }
+
+    function showMainApp(asAdmin) {
+        hero.style.display = 'none';
+        signin.style.display = 'none';
+        mainApp.style.display = 'block';
+        setTimeout(() => mainApp.style.opacity = '1', 30);
+    }
+
+    function showNotif(msg) {
+        const n = document.createElement('div');
+        n.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#ffd8b0;color:#4a2f1f;padding:15px 25px;border-radius:50px;box-shadow:0 5px 15px rgba(0,0,0,0.2);z-index:2000;font-weight:600;border:2px solid #ca9f7c;animation:slideIn 0.3s ease;';
+        n.textContent = msg;
+        document.body.appendChild(n);
+        setTimeout(() => {
+            n.style.animation = 'slideIn 0.3s ease reverse';
+            setTimeout(() => {
+                if (n.parentNode) document.body.removeChild(n);
+            }, 300);
+        }, 3000);
+    }
+
     }
