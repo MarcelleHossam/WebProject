@@ -1326,3 +1326,51 @@ footer {
     padding-left: 15px;
     display: block;
 }
+
+/* ========== SIGNUP MODAL SPECIFIC ========== */
+#signupModal .modal-content {
+    max-width: 450px;
+    padding: 30px 30px 35px 30px;
+}
+
+#signupModal form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+#signupModal label {
+    margin-bottom: -10px;
+    font-size: 1rem;
+}
+
+#signupModal input {
+    padding: 14px 18px;
+    margin-bottom: 0;
+    height: auto;
+}
+
+#signupModal .auth-btn-large {
+    margin-top: 10px;
+    padding: 16px 20px;
+    font-size: 1.3rem;
+    min-height: 60px;
+    width: 100%;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+}
+
+/* ========== LOGIN MODAL SPECIFIC ========== */
+#loginModal .modal-content {
+    max-width: 450px;
+    padding: 30px 30px 35px 30px;
+}
+
+#loginModal .auth-btn-large {
+    padding: 16px 20px;
+    font-size: 1.3rem;
+    margin-top: 15px;
+}
