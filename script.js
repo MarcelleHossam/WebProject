@@ -1259,3 +1259,76 @@
             showNotif('Comment deleted.');
         }
     };
+
+    // ========== FAVORITES ==========
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let currentRecipe = null;
+    let currentCat = null;
+
+    function updateFavDisplay() {
+        favCount.textContent = favorites.length;
+        if (favorites.length === 0) {
+            favList.innerHTML = '<div class="empty-favorites">No favorites yet. Start saving recipes!</div>';
+        } else {
+            let html = '';
+            favorites.forEach((f, i) => {
+                html += `<div class="favorite-item"><div class="favorite-info"><span class="favorite-name">${f.name}</span><span class="favorite-category">${f.category}</span></div><button class="remove-favorite" onclick="removeFavorite(${i})"><i class="fas fa-times"></i></button></div>`;
+            });
+            favList.innerHTML = html;
+        }
+        if (currentRecipe) {
+            const exists = favorites.some(f => f.name === currentRecipe.name && f.category === currentRecipe.category);
+            detailFavBtn.innerHTML = exists ? '<i class="fas fa-heart"></i> Remove from Favorites' : '<i class="far fa-heart"></i> Add to Favorites';
+            detailFavBtn.classList.toggle('active', exists);
+        }
+        renderAllCategories();
+    }
+
+    window.toggleFavorite = function(dish, cat) {
+        const idx = favorites.findIndex(f => f.name === dish && f.category === cat);
+        if (idx === -1) {
+            favorites.push({ name: dish, category: cat });
+            showNotif(`"${dish}" added!`);
+        } else {
+            favorites.splice(idx, 1);
+            showNotif(`"${dish}" removed.`);
+        }
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        updateFavDisplay();
+    };
+
+    window.removeFavorite = function(i) {
+        const r = favorites[i];
+        favorites.splice(i, 1);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        updateFavDisplay();
+        showNotif(`"${r.name}" removed.`);
+    };
+
+    if (clearFav) {
+        clearFav.onclick = () => {
+            if (favorites.length) {
+                favorites = [];
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavDisplay();
+                showNotif('All cleared.');
+            }
+        };
+    }
+
+    if (detailFavBtn) {
+        detailFavBtn.onclick = () => {
+            if (currentRecipe) toggleFavorite(currentRecipe.name, currentRecipe.category);
+        };
+    }
+
+    if (favBtn) {
+        favBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            favDropdown.classList.toggle('show');
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!favBtn?.contains(e.target) && !favDropdown?.contains(e.target)) favDropdown?.classList.remove('show');
+    });
