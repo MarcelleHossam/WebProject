@@ -1548,7 +1548,9 @@
                 alert('Write something.');
             }
         };
-        // ========== HELPER FUNCTIONS ==========
+    }
+
+    // ========== HELPER FUNCTIONS ==========
     function updateCommentForm() {
         if (loggedIn) {
             loginPrompt.style.display = 'none';
@@ -1600,7 +1602,8 @@
             }, 300);
         }, 3000);
     }
-        // ========== EVENT LISTENERS ==========
+
+    // ========== EVENT LISTENERS ==========
     if (signupBtn) signupBtn.onclick = () => openModal('signupModal');
     if (loginBtn) loginBtn.onclick = () => openModal('loginModal');
     if (mainSignup) mainSignup.onclick = () => openModal('signupModal');
@@ -1631,7 +1634,7 @@
         }
     };
 
-// ========== FIXED ADMIN TABS ==========
+    // ========== FIXED ADMIN TABS ==========
     if (adminTabs && adminTabs.length > 0) {
         adminTabs.forEach(tab => {
             tab.addEventListener('click', function() {
@@ -1669,9 +1672,7 @@
         }, 100);
     }
 
-    }
-
- // Add slideIn animation
+    // Add slideIn animation
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {
@@ -1785,4 +1786,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.addEventListener('load', function() {
     initPasswordToggles();
-}); 
+});
