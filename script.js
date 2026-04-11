@@ -1689,3 +1689,100 @@
     updateAuthButtons();
     saveCategories();
 })();
+
+// ========== PASSWORD SHOW/HIDE FUNCTIONALITY ==========
+function initPasswordToggles() {
+    const passwordFields = document.querySelectorAll('input[type="password"]');
+    
+    passwordFields.forEach(field => {
+        if (field.hasAttribute('data-password-toggle')) return;
+        field.setAttribute('data-password-toggle', 'true');
+        
+        let wrapper = field.parentElement;
+        if (!wrapper.classList.contains('password-field-wrapper')) {
+            wrapper = document.createElement('div');
+            wrapper.className = 'password-field-wrapper';
+            field.parentNode.insertBefore(wrapper, field);
+            wrapper.appendChild(field);
+        }
+        
+        if (wrapper.querySelector('.password-toggle-btn')) return;
+        
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'password-toggle-btn';
+        toggleBtn.innerHTML = '<i class="far fa-eye-slash"></i>';
+        toggleBtn.setAttribute('title', 'Show password');
+        toggleBtn.setAttribute('aria-label', 'Show password');
+        
+        toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                this.innerHTML = '<i class="far fa-eye"></i>';
+                this.setAttribute('title', 'Hide password');
+                this.setAttribute('aria-label', 'Hide password');
+            } else {
+                field.type = 'password';
+                this.innerHTML = '<i class="far fa-eye-slash"></i>';
+                this.setAttribute('title', 'Show password');
+                this.setAttribute('aria-label', 'Show password');
+            }
+            
+            field.focus();
+        });
+        
+        wrapper.appendChild(toggleBtn);
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(initPasswordToggles, 100);
+});
+
+// Initialize when modals open
+const originalOpenModal = window.openModal;
+window.openModal = function(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'flex';
+        setTimeout(function() {
+            initPasswordToggles();
+        }, 150);
+    }
+};
+
+// Re-initialize when any modal content changes
+const modalObserver = new MutationObserver(function(mutations) {
+    let needsInit = false;
+    
+    mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1) {
+                    if (node.querySelector && node.querySelector('input[type="password"]')) {
+                        needsInit = true;
+                    }
+                }
+            });
+        }
+    });
+    
+    if (needsInit) {
+        setTimeout(initPasswordToggles, 50);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    modalObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+});
+
+window.addEventListener('load', function() {
+    initPasswordToggles();
+}); 
