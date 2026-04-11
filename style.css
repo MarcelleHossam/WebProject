@@ -790,6 +790,7 @@ html {
 .favorite-icon.active i {
     font-weight: 900;
 }
+
 /* ========== RECIPE DETAIL PAGE ========== */
 .recipe-detail-page {
     background-color: rgba(255, 255, 255, 0.95);
@@ -1023,4 +1024,179 @@ html {
     color: #4a2f1f;
     line-height: 1.6;
     flex: 1;
+}
+
+/* ========== COMMENTS SECTION ========== */
+.comments-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 3px dashed #e4c2a2;
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.comments-title {
+    font-size: 1.8rem;
+    color: #4a2f1f;
+}
+
+.comment-count {
+    background-color: #ffd8b0;
+    padding: 5px 15px;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a2f1f;
+}
+
+.comment-form {
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 40px;
+    padding: 20px;
+    border: 2px solid #ffd8b0;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px dashed #e4c2a2;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 245, 235, 0.3);
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #ffb77a;
+    background-color: white;
+}
+
+.comment-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-prompt {
+    color: #7a5a44;
+    font-size: 1rem;
+}
+
+.login-prompt a {
+    color: #b45f2e;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+.comments-list {
+    margin-top: 20px;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 40px;
+    background-color: rgba(255, 245, 235, 0.5);
+    border-radius: 40px;
+    color: #ab8a70;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+.comment-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 40px;
+    margin-bottom: 15px;
+    border: 1px solid #f5deca;
+    position: relative;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #e4c2a2;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-author-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ffd8b0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a2f1f;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.comment-author-name {
+    font-weight: 600;
+    color: #4a2f1f;
+    font-size: 1.1rem;
+}
+
+.comment-date {
+    color: #ab8a70;
+    font-size: 0.9rem;
+}
+
+.comment-text {
+    color: #7a5a44;
+    line-height: 1.6;
+    font-size: 1rem;
+    padding: 0 5px;
+}
+
+.comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #e4c2a2;
+}
+
+.comment-action {
+    background: none;
+    border: none;
+    color: #ab8a70;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.comment-action:hover {
+    color: #b45f2e;
+}
+
+.comment-action i {
+    font-size: 0.9rem;
 }
