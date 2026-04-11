@@ -1735,3 +1735,167 @@ footer {
     background-color: #ff4d4d;
     color: white;
 }
+
+/* ========== COMMENTS WITH REPLIES ========== */
+.comment-replies {
+    margin-left: 50px;
+    margin-top: 15px;
+    padding-left: 20px;
+    border-left: 3px solid #ffd8b0;
+}
+
+.reply-item {
+    background-color: #fff9f2;
+    padding: 15px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    border: 1px solid #ffeada;
+}
+
+.reply-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.reply-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #4a2f1f;
+}
+
+.reply-author i {
+    color: #c97e4d;
+    font-size: 0.9rem;
+}
+
+.reply-date {
+    color: #ab8a70;
+    font-size: 0.8rem;
+}
+
+.reply-text {
+    color: #7a5a44;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.reply-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.reply-action {
+    background: none;
+    border: none;
+    color: #ab8a70;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.reply-action:hover {
+    color: #c97e4d;
+}
+
+.reply-action.delete:hover {
+    color: #ff4d4d;
+}
+
+.view-replies-btn {
+    background: none;
+    border: none;
+    color: #c97e4d;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.view-replies-btn:hover {
+    background-color: #ffeada;
+}
+
+.comment-author.admin .comment-author-name::after {
+    content: '👑';
+    margin-left: 5px;
+    font-size: 0.9rem;
+}
+
+/* ========== PASSWORD FIELD WRAPPER ========== */
+.password-field-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.password-field-wrapper input {
+    width: 100%;
+    padding: 14px 50px 14px 18px !important;
+    border: 2px solid #ffd8b0;
+    border-radius: 50px;
+    font-size: 1rem;
+    background-color: #fff3e6;
+    box-sizing: border-box;
+    height: auto;
+    margin: 0;
+}
+
+.password-field-wrapper input:focus {
+    outline: none;
+    border-color: #ffb77a;
+    background-color: white;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #c97e4d;
+    cursor: pointer;
+    font-size: 1.3rem;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.password-toggle-btn:hover {
+    color: #b45f2e;
+    background-color: rgba(255, 216, 176, 0.3);
+}
+
+.password-toggle-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.password-toggle-btn i {
+    pointer-events: none;
+    font-size: 1.3rem;
+}
+
+.password-field-wrapper + .error {
+    margin-top: -12px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+}
