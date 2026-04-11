@@ -143,3 +143,91 @@
                     <div class="admin-list" id="commentsList"></div>
                 </div>
             </div>
+
+            <!-- Category/Recipe Modals -->
+            <div id="categoryModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('categoryModal')">&times;</span>
+                    <h2 id="categoryModalTitle">Add Category</h2>
+                    <form id="categoryForm" onsubmit="event.preventDefault(); saveCategory();">
+                        <input type="hidden" id="categoryId">
+                        
+                        <label for="categoryName">Category Name:</label>
+                        <input type="text" id="categoryName" required>
+                        
+                        <label for="categoryIcon">Icon (Font Awesome class):</label>
+                        <input type="text" id="categoryIcon" value="fas fa-utensils" required>
+                        <small>e.g., fas fa-leaf, fas fa-candy-cane, fas fa-truck</small>
+                        
+                        <button type="submit" class="auth-btn-large">Save Category</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="recipeModal" class="modal">
+                <div class="modal-content recipe-modal">
+                    <span class="close" onclick="closeModal('recipeModal')">&times;</span>
+                    <h2 id="recipeModalTitle">Add Recipe</h2>
+                    <form id="recipeForm" onsubmit="event.preventDefault(); saveRecipe();">
+                        <input type="hidden" id="recipeId">
+                        <input type="hidden" id="recipeCategoryKey">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipeName">Recipe Name:</label>
+                                <input type="text" id="recipeName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipeArabic">Arabic Name:</label>
+                                <input type="text" id="recipeArabic" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipeCategory">Category:</label>
+                                <select id="recipeCategory" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipeTime">Prep Time:</label>
+                                <input type="text" id="recipeTime" value="30 min" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipeDifficulty">Difficulty:</label>
+                                <select id="recipeDifficulty" required>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipeServings">Servings:</label>
+                                <input type="text" id="recipeServings" value="4 servings" required>
+                            </div>
+                        </div>
+
+                        <label for="recipeDescription">Description:</label>
+                        <textarea id="recipeDescription" rows="3" required></textarea>
+
+                        <label for="recipeEmoji">Emoji:</label>
+                        <input type="text" id="recipeEmoji" value="🍽️" required>
+
+                        <label for="recipeImage">Image Filename:</label>
+                        <input type="text" id="recipeImage" placeholder="e.g., dish.jpeg">
+
+                        <label for="recipeTags">Tags (comma separated):</label>
+                        <input type="text" id="recipeTags" placeholder="Easy, Oriental, Quick" required>
+
+                        <label for="recipeIngredients">Ingredients (one per line):</label>
+                        <textarea id="recipeIngredients" rows="5" required></textarea>
+
+                        <label for="recipeInstructions">Instructions (one per line):</label>
+                        <textarea id="recipeInstructions" rows="8" required></textarea>
+
+                        <button type="submit" class="auth-btn-large">Save Recipe</button>
+                    </form>
+                </div>
+            </div>
