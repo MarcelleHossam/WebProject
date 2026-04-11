@@ -44,11 +44,30 @@
                     </button>
                 </div>
                 <div class="admin-link">
-                    <a href="#" id="adminLink">👨‍🍳 Admin Access (Demo)</a>
+                    <a href="#" id="adminLink">👨‍🍳 Admin Login</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('adminLoginModal')">&times;</span>
+            <h2>Admin Login</h2>
+            <form id="adminLoginForm" onsubmit="event.preventDefault(); handleAdminLogin();">
+                <label for="adminUsername">Username:</label>
+                <input type="text" id="adminUsername" required>
+                <span id="adminUsernameError" class="error"></span>
+
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" required>
+                <span id="adminPasswordError" class="error"></span>
+
+                <button type="submit" class="auth-btn-large">Login as Admin</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Main App -->
     <div id="mainApp">
@@ -79,31 +98,20 @@
                     </div>
                     <button class="auth-btn" id="mainSignupBtn"><i class="fas fa-user-plus"></i> Sign up</button>
                     <button class="auth-btn" id="mainLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
-                    <button class="auth-btn" id="mainAdminBtn"><i class="fas fa-crown"></i> Admin <span class="admin-badge">boss</span></button>
+                    <button class="auth-btn" id="mainAdminBtn"><i class="fas fa-crown"></i> Admin</button>
                     <!-- Sign Out Button (hidden by default) -->
                     <button class="auth-btn" id="signOutBtn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
                 </div>
             </div>
 
-            <!-- Welcome & Categories -->
-            <div class="categories-welcome">
-                ✨ Choose a category to begin your culinary journey ✨
-            </div>
-            <div class="category-icons" id="categoryIcons">
-                <div class="category-icon-item" data-category="healthy">
-                    <div class="icon-circle"><i class="fas fa-leaf"></i></div>
-                    <span>Healthy</span>
+            <!-- Admin Panel (hidden by default) -->
+            <div id="adminPanel" class="admin-panel" style="display: none;">
+                <div class="admin-header">
+                    <h2><i class="fas fa-crown"></i> Admin Dashboard</h2>
+                    <button class="close-admin" id="closeAdminBtn"><i class="fas fa-times"></i></button>
                 </div>
-                <div class="category-icon-item" data-category="Oriental">
-                    <div class="icon-circle"><div class="icon-group"><i class="fas fa-fire"></i><i class="fas fa-utensils"></i></div></div>
-                    <span>Oriental Food</span>
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="categories">Categories</button>
+                    <button class="admin-tab" data-tab="recipes">Recipes</button>
+                    <button class="admin-tab" data-tab="comments">Comments</button>
                 </div>
-                <div class="category-icon-item" data-category="desserts">
-                    <div class="icon-circle"><i class="fas fa-candy-cane"></i></div>
-                    <span>Desserts</span>
-                </div>
-                <div class="category-icon-item" data-category="street">
-                    <div class="icon-circle"><i class="fas fa-truck"></i></div>
-                    <span>Street Food</span>
-                </div>
-            </div>
