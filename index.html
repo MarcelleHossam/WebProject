@@ -44,30 +44,11 @@
                     </button>
                 </div>
                 <div class="admin-link">
-                    <a href="#" id="adminLink">👨‍🍳 Admin Login</a>
+                    <a href="#" id="adminLink">👨‍🍳 Admin Access (Demo)</a>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Admin Login Modal -->
-    <div id="adminLoginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('adminLoginModal')">&times;</span>
-            <h2>Admin Login</h2>
-            <form id="adminLoginForm" onsubmit="event.preventDefault(); handleAdminLogin();">
-                <label for="adminUsername">Username:</label>
-                <input type="text" id="adminUsername" required>
-                <span id="adminUsernameError" class="error"></span>
-
-                <label for="adminPassword">Password:</label>
-                <input type="password" id="adminPassword" required>
-                <span id="adminPasswordError" class="error"></span>
-
-                <button type="submit" class="auth-btn-large">Login as Admin</button>
-            </form>
-        </div>
-    </div>
 
     <!-- Main App -->
     <div id="mainApp">
@@ -80,7 +61,7 @@
                     </div>
                     <span class="site-name arabic-title">ست الكل</span>
                 </div>
-                                <div class="user-actions">
+                <div class="user-actions">
                     <div class="favorites-container">
                         <button class="favorites-btn" id="favoritesBtn">
                             <i class="fas fa-heart"></i> Favorites
@@ -98,117 +79,31 @@
                     </div>
                     <button class="auth-btn" id="mainSignupBtn"><i class="fas fa-user-plus"></i> Sign up</button>
                     <button class="auth-btn" id="mainLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
-                    <button class="auth-btn" id="mainAdminBtn"><i class="fas fa-crown"></i> Admin</button>
+                    <button class="auth-btn" id="mainAdminBtn"><i class="fas fa-crown"></i> Admin <span class="admin-badge">boss</span></button>
+                    <!-- Sign Out Button (hidden by default) -->
                     <button class="auth-btn" id="signOutBtn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
                 </div>
             </div>
 
-            <!-- Categories Welcome  -->
+            <!-- Welcome & Categories -->
             <div class="categories-welcome">
                 ✨ Choose a category to begin your culinary journey ✨
             </div>
-            <div class="category-icons" id="categoryIcons"></div>
-
-            <!-- Back Button -->
-            <button class="back-button" id="backButton" style="display: none;">
-                <i class="fas fa-arrow-left"></i> Back to Categories
-            </button>
-
-            <!-- Categories Container -->
-            <div id="categoriesContainer"></div>
-
-            <!-- Recipe Detail Page -->
-            <div id="recipeDetailPage" class="recipe-detail-page">
-                <div class="detail-nav">
-                    <button class="back-to-category" id="backToCategoryBtn">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </button>
-                                        <div class="detail-actions">
-                        <button class="detail-favorite-btn" id="detailFavoriteBtn">
-                            <i class="far fa-heart"></i> Add to Favorites
-                        </button>
-                    </div>
+            <div class="category-icons" id="categoryIcons">
+                <div class="category-icon-item" data-category="healthy">
+                    <div class="icon-circle"><i class="fas fa-leaf"></i></div>
+                    <span>Healthy</span>
                 </div>
-                <div class="detail-header-section">
-                    <span class="detail-category-tag" id="detailCategory">Street Food</span>
-                    <h1 class="detail-title" id="detailTitle">Kebda (Liver Sandwich)</h1>
-                    <div class="detail-title-arabic" id="detailArabic">كبدة</div>
-                    <div class="detail-description" id="detailDescription">
-                        Spiced sautéed liver with peppers and onions, served in a soft roll. Bold flavors, pure street food energy.
-                    </div>
+                <div class="category-icon-item" data-category="Oriental">
+                    <div class="icon-circle"><div class="icon-group"><i class="fas fa-fire"></i><i class="fas fa-utensils"></i></div></div>
+                    <span>Oriental Food</span>
                 </div>
-                <div class="detail-tags" id="detailTags"></div>
-                <div class="detail-meta" id="detailMeta">
-                    <span class="meta-item"><i class="far fa-clock"></i> <span id="detailTime">15 min</span></span>
-                    <span class="meta-item"><i class="fas fa-utensils"></i> <span id="detailServings">4 servings</span></span>
-                    <span class="meta-item"><i class="fas fa-chart-line"></i> <span id="detailDifficulty">Easy</span></span>
+                <div class="category-icon-item" data-category="desserts">
+                    <div class="icon-circle"><i class="fas fa-candy-cane"></i></div>
+                    <span>Desserts</span>
                 </div>
-                <div class="ingredients-section">
-                    <h2 class="section-title">Ingredients</h2>
-                    <ul class="ingredients-list" id="ingredientsList"></ul>
+                <div class="category-icon-item" data-category="street">
+                    <div class="icon-circle"><i class="fas fa-truck"></i></div>
+                    <span>Street Food</span>
                 </div>
-                <div class="instructions-section">
-                    <h2 class="section-title">Instructions</h2>
-                    <ol class="instructions-list" id="instructionsList"></ol>
-                </div>
-                
-                <!-- Comments Section  -->
-                
             </div>
-            <footer>👩‍🍳 ست الكل — clear, structured recipes, just like a digital chef</footer>
-        </div>
-    </div>
-
-    <!-- Sign Up Modal -->
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('signupModal')">&times;</span>
-            <h2>Sign Up</h2>
-            <form id="signupForm" onsubmit="event.preventDefault(); handleSignup();">
-                <label for="signupName">Name:</label>
-                <input type="text" id="signupName" required>
-                <span id="signupNameError" class="error"></span>
-
-                <label for="signupEmail">Email:</label>
-                <input type="email" id="signupEmail" required>
-                <span id="signupEmailError" class="error"></span>
-
-                <label for="signupPhone">Phone (optional):</label>
-                <input type="text" id="signupPhone">
-                <span id="signupPhoneError" class="error"></span>
-
-                <label for="signupPassword">Password (min 6 characters):</label>
-                <input type="password" id="signupPassword" required>
-                <span id="signupPasswordError" class="error"></span>
-
-                <label for="signupConfirm">Password Confirm:</label>
-                <input type="password" id="signupConfirm" required>
-                <span id="signupConfirmError" class="error"></span>
-
-                <button type="submit" class="auth-btn-large">Create Account</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2>Login</h2>
-            <form id="loginForm" onsubmit="event.preventDefault(); handleLogin();">
-                <label for="loginEmail">Email:</label>
-                <input type="email" id="loginEmail" required>
-                <span id="loginEmailError" class="error"></span>
-
-                <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" required>
-                <span id="loginPasswordError" class="error"></span>
-
-                <button type="submit" class="auth-btn-large">Log In</button>
-            </form>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
