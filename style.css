@@ -790,3 +790,237 @@ html {
 .favorite-icon.active i {
     font-weight: 900;
 }
+/* ========== RECIPE DETAIL PAGE ========== */
+.recipe-detail-page {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    border-radius: 60px 20px 60px 20px;
+    padding: 40px;
+    margin: 30px 0 50px;
+    border: 3px solid #ffd8b0;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.recipe-detail-page.visible {
+    display: block;
+}
+
+.detail-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #e4c2a2;
+}
+
+.back-to-category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    color: #b45f2e;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: all 0.2s ease;
+}
+
+.back-to-category:hover {
+    background-color: #ffd8b0;
+    color: #4a2f1f;
+}
+
+.detail-favorite-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: white;
+    border: 2px solid #ffd8b0;
+    padding: 12px 25px;
+    border-radius: 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a3729;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.detail-favorite-btn i {
+    color: #ff4d4d;
+    font-size: 1.3rem;
+}
+
+.detail-favorite-btn:hover {
+    background-color: #ffe1c6;
+    transform: scale(1.05);
+}
+
+.detail-favorite-btn.active {
+    background-color: #ffe1c6;
+}
+
+.detail-header-section {
+    margin-bottom: 30px;
+}
+
+.detail-category-tag {
+    display: inline-block;
+    background-color: #ffd8b0;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a2f1f;
+    margin-bottom: 15px;
+}
+
+.detail-title {
+    font-size: 3rem;
+    color: #4a2f1f;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.detail-title-arabic {
+    font-size: 1.8rem;
+    color: #b45f2e;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.detail-description {
+    font-size: 1.2rem;
+    color: #7a5a44;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: rgba(255, 216, 176, 0.2);
+    border-radius: 30px;
+    border-left: 5px solid #ffb77a;
+}
+
+.detail-tags {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.tag {
+    background-color: #f0e2d2;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a2f1f;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tag i {
+    color: #c97e4d;
+}
+
+.detail-meta {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: rgba(255, 216, 176, 0.15);
+    border-radius: 50px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    color: #4a2f1f;
+}
+
+.meta-item i {
+    font-size: 1.3rem;
+    color: #c97e4d;
+}
+
+.ingredients-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #4a2f1f;
+    margin-bottom: 20px;
+    border-left: 10px solid #ffb77a;
+    padding-left: 20px;
+}
+
+.ingredients-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.ingredient-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background-color: rgba(255, 245, 235, 0.5);
+    border-radius: 40px;
+    font-size: 1.1rem;
+    color: #4a2f1f;
+}
+
+.ingredient-item i {
+    color: #c97e4d;
+    font-size: 0.8rem;
+}
+
+.instructions-section {
+    margin-bottom: 40px;
+}
+
+.instructions-list {
+    list-style: none;
+    counter-reset: instruction-counter;
+}
+
+.instruction-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 245, 235, 0.5);
+    border-radius: 60px;
+    counter-increment: instruction-counter;
+}
+
+.instruction-number {
+    width: 40px;
+    height: 40px;
+    background-color: #ffb77a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.instruction-text {
+    font-size: 1.1rem;
+    color: #4a2f1f;
+    line-height: 1.6;
+    flex: 1;
+}
