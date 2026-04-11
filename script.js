@@ -1332,3 +1332,220 @@
     document.addEventListener('click', (e) => {
         if (!favBtn?.contains(e.target) && !favDropdown?.contains(e.target)) favDropdown?.classList.remove('show');
     });
+
+    // ========== RECIPE DISPLAY FUNCTIONS ==========
+    function renderCategory(key, cat) {
+        if (!cat || !cat.dishes) return '';
+        
+        let html = `<div class="category-section" id="category-${key}"><div class="category-title"><i class="${cat.icon}"></i> ${cat.name}</div><div class="recipe-grid">`;
+        
+        cat.dishes.forEach((dish, idx) => {
+            if (!dish) return;
+            
+            const isFav = favorites.some(f => f.name === dish.name && f.category === cat.name);
+            const favIconHtml = `<div class="favorite-icon ${isFav ? 'active' : ''}" data-catkey="${key}" data-dishidx="${idx}" onclick="event.stopPropagation(); toggleFavoriteFromCard('${key}',${idx})"><i class="${isFav ? 'fas' : 'far'} fa-heart"></i> ${isFav ? 'Remove from' : 'Add to'} Favorites</div>`;
+
+            let imageHtml;
+            if (dish.img) {
+                let folder = '';
+                if (key === 'healthy') folder = 'Healthy/';
+                else if (key === 'desserts') folder = 'Desserts/';
+                else if (key === 'oriental') folder = 'Oriental/';
+                else if (key === 'street') folder = 'Street Food/';
+                
+                if (folder) {
+                    imageHtml = `<div class="recipe-img-grid" style="background-image: url('${folder}${dish.img}'); background-size: cover; background-position: center;"></div>`;
+                } else {
+                    imageHtml = `<div class="recipe-img-grid">${dish.emoji || '🍽️'}</div>`;
+                }
+            } else {
+                imageHtml = `<div class="recipe-img-grid">${dish.emoji || '🍽️'}</div>`;
+            }
+
+            html += `<div class="recipe-card-grid" data-category="${key}" data-dish-index="${idx}">
+                ${imageHtml}
+                <div class="recipe-info-grid">
+                    <div class="recipe-name-grid">${dish.name}</div>
+                    <div class="recipe-name-arabic">${dish.arabic}</div>
+                    <div class="recipe-description">${dish.description.substring(0,80)}...</div>
+                    <div class="recipe-meta-grid"><span class="time-badge">⏱️ ${dish.time}</span><span class="difficulty-badge">⚖️ ${dish.difficulty}</span></div>
+                    <div class="servings">${dish.servings}</div>
+                    ${favIconHtml}
+                </div>
+            </div>`;
+        });
+        
+        html += '</div></div>';
+        return html;
+    }
+
+    function renderAllCategories() {
+        let all = '';
+        for (let k in categories) {
+            if (categories[k]) {
+                all += renderCategory(k, categories[k]);
+            }
+        }
+        catContainer.innerHTML = all;
+    }
+
+    function showCategory(key) {
+        currentCat = key;
+        welcome.style.display = 'none';
+        document.querySelectorAll('.category-icon-item').forEach(ic => ic.style.display = 'none');
+        detailPage.classList.remove('visible');
+        catContainer.classList.add('visible');
+        document.querySelectorAll('.category-section').forEach(s => s.style.display = 'none');
+        const sel = document.getElementById('category-'+key);
+        if (sel) {
+            sel.style.display = 'block';
+            backBtn.style.display = 'inline-flex';
+            sel.scrollIntoView({behavior:'smooth'});
+        }
+    }
+
+    function showRecipeDetail(key, idx) {
+        const dish = categories[key].dishes[idx];
+        const catName = categories[key].name;
+        currentRecipe = { name: dish.name, category: catName };
+        currentCat = key;
+
+        detailCat.textContent = catName;
+        detailTitle.textContent = dish.name;
+        detailArabic.textContent = dish.arabic;
+        detailDesc.textContent = dish.description;
+
+        let tagsHtml = '';
+        dish.tags.forEach(t => {
+            let ic = 'fas fa-tag';
+            if (t==='Easy') ic='fas fa-clock';
+            else if (t==='Oriental') ic='fas fa-egg';
+            else if (t==='Quick') ic='fas fa-bolt';
+            else if (t==='Medium') ic='fas fa-chart-line';
+            else if (t==='Hard') ic='fas fa-mountain';
+            tagsHtml += `<span class="tag"><i class="${ic}"></i> ${t}</span>`;
+        });
+        detailTags.innerHTML = tagsHtml;
+
+        detailTime.textContent = dish.time;
+        detailServ.textContent = dish.servings;
+        detailDiff.textContent = dish.difficulty;
+
+        ingList.innerHTML = dish.ingredients.map(i => `<li class="ingredient-item"><i class="fas fa-circle"></i> ${i}</li>`).join('');
+        instrList.innerHTML = dish.instructions.map((s, i) => `<li class="instruction-item"><span class="instruction-number">${i+1}</span><span class="instruction-text">${s}</span></li>`).join('');
+
+        const isFav = favorites.some(f => f.name === dish.name && f.category === catName);
+        detailFavBtn.innerHTML = isFav ? '<i class="fas fa-heart"></i> Remove from Favorites' : '<i class="far fa-heart"></i> Add to Favorites';
+        detailFavBtn.classList.toggle('active', isFav);
+
+        updateCommentsUI();
+        showAdminRecipeActions();
+
+        catContainer.classList.remove('visible');
+        backBtn.style.display = 'none';
+        detailPage.classList.add('visible');
+        detailPage.scrollIntoView({behavior:'smooth'});
+    }
+
+    function showAllIcons() {
+        welcome.style.display = 'block';
+        document.querySelectorAll('.category-icon-item').forEach(ic => ic.style.display = 'flex');
+        catContainer.classList.remove('visible');
+        backBtn.style.display = 'none';
+        detailPage.classList.remove('visible');
+        currentRecipe = null;
+        currentCat = null;
+        hideAdminRecipeActions();
+    }
+
+    function showAdminRecipeActions() {
+        if (isAdmin && currentRecipe && adminRecipeActions) {
+            adminRecipeActions.style.display = 'flex';
+        } else {
+            hideAdminRecipeActions();
+        }
+    }
+
+    function hideAdminRecipeActions() {
+        if (adminRecipeActions) {
+            adminRecipeActions.style.display = 'none';
+        }
+    }
+
+    if (editRecipeBtn) {
+        editRecipeBtn.onclick = () => {
+            if (!currentRecipe || !isAdmin) return;
+            
+            for (let catKey in categories) {
+                if (categories[catKey] && categories[catKey].dishes) {
+                    const index = categories[catKey].dishes.findIndex(d => d && d.name === currentRecipe.name);
+                    if (index !== -1) {
+                        editRecipe(catKey, index);
+                        break;
+                    }
+                }
+            }
+        };
+    }
+
+    if (deleteRecipeBtn) {
+        deleteRecipeBtn.onclick = () => {
+            if (!currentRecipe || !isAdmin) return;
+            
+            if (confirm(`Are you sure you want to delete "${currentRecipe.name}"?`)) {
+                for (let catKey in categories) {
+                    if (categories[catKey] && categories[catKey].dishes) {
+                        const index = categories[catKey].dishes.findIndex(d => d && d.name === currentRecipe.name);
+                        if (index !== -1) {
+                            categories[catKey].dishes.splice(index, 1);
+                            saveCategories();
+                            renderAllCategories();
+                            detailPage.classList.remove('visible');
+                            showNotif('Recipe deleted');
+                            break;
+                        }
+                    }
+                }
+            }
+        };
+    }
+
+    window.toggleFavoriteFromCard = function(catKey, dishIdx) {
+        const dish = categories[catKey].dishes[dishIdx];
+        const catName = categories[catKey].name;
+        toggleFavorite(dish.name, catName);
+    };
+
+    if (catContainer) {
+        catContainer.addEventListener('click', (e) => {
+            const card = e.target.closest('.recipe-card-grid');
+            if (!card) return;
+            if (e.target.closest('.favorite-icon')) return;
+            const catKey = card.dataset.category;
+            const idx = card.dataset.dishIndex;
+            showRecipeDetail(catKey, parseInt(idx));
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener('click', showAllIcons);
+    }
+
+    if (backToCat) {
+        backToCat.addEventListener('click', () => {
+            detailPage.classList.remove('visible');
+            if (currentCat) showCategory(currentCat);
+        });
+    }
+
+    if (postComment) {
+        postComment.onclick = () => {
+            const t = commentText.value.trim();
+            if (t) {
+                addComment(t);
+                commentText.value = '';
+            } else {
+                alert('Write something.');
+            }
+        };
+    }
