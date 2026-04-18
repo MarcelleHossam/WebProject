@@ -1296,6 +1296,9 @@
 
     // ========== FAVORITES ==========
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        // Calorie filter variables
+    let activeCalorieFilter = { min: 0, max: 680 };
+    let isCalorieSearchVisible = false;
     let currentRecipe = null;
     let currentCat = null;
 
