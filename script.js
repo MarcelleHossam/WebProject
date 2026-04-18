@@ -629,7 +629,6 @@
                 }
             ]
         },
-    // ========== Malak street recipes section  =========
         street: { 
             name: 'Street Food', 
             icon: 'fas fa-truck', 
@@ -645,7 +644,8 @@
                     emoji:'🍔', 
                     tags:['Easy','Quick','Comfort Food'],
                     ingredients:['500g ground beef (80/20)','4 brioche burger buns','4 slices cheddar cheese','1 lettuce, leaves separated','2 tomatoes, sliced','1 onion, sliced','Pickles','Salt and pepper','2 tbsp butter','For sauce: 1/2 cup mayo, 2 tbsp ketchup, 1 tbsp mustard, 1 tsp paprika'],
-                    instructions:['Divide beef into 4 patties, season with salt and pepper.','Mix sauce ingredients in a small bowl.','Heat grill or skillet, cook patties 3-4 minutes per side.','Add cheese in last minute, cover to melt.','Toast buns with butter.','Spread sauce on bottom bun, layer lettuce, tomato, onion, pickles, patty.','Close burger, serve with fries.']
+                    instructions:['Divide beef into 4 patties, season with salt and pepper.','Mix sauce ingredients in a small bowl.','Heat grill or skillet, cook patties 3-4 minutes per side.','Add cheese in last minute, cover to melt.','Toast buns with butter.','Spread sauce on bottom bun, layer lettuce, tomato, onion, pickles, patty.','Close burger, serve with fries.'],
+                    calories: 650, protein: 35, carbs: 45, fats: 38
                 },
                 { 
                     name:'Egyptian Shawarma', 
@@ -658,7 +658,8 @@
                     emoji:'🌯', 
                     tags:['Medium','Oriental','Street Food'],
                     ingredients:['600g chicken thighs or beef strips','1 cup yogurt','3 garlic cloves, minced','2 tbsp vinegar','1 tsp cumin','1 tsp paprika','1/2 tsp cinnamon','1/2 tsp cardamom','Salt and pepper','Pita bread','Garlic sauce','Pickles','French fries'],
-                    instructions:['For marinade: mix yogurt, garlic, vinegar, and spices.','Add meat, coat well. Marinate 4 hours or overnight.','Heat large skillet or grill, cook meat until charred and cooked.','Warm pita bread, spread garlic sauce.','Layer meat, pickles, and fries.','Roll tightly, wrap in foil.','Serve immediately.']
+                    instructions:['For marinade: mix yogurt, garlic, vinegar, and spices.','Add meat, coat well. Marinate 4 hours or overnight.','Heat large skillet or grill, cook meat until charred and cooked.','Warm pita bread, spread garlic sauce.','Layer meat, pickles, and fries.','Roll tightly, wrap in foil.','Serve immediately.'],
+                    calories: 580, protein: 34, carbs: 52, fats: 28
                 },
                 { 
                     name:'Foul Medames', 
@@ -671,7 +672,8 @@
                     emoji:'🫘', 
                     tags:['Easy','Oriental','Breakfast'],
                     ingredients:['2 cans fava beans','4 garlic cloves, minced','1 lemon, juiced','1 tsp cumin','Salt to taste','1/4 cup olive oil','Fresh parsley, chopped','2 tomatoes, diced','1 onion, diced','Pita bread for serving'],
-                    instructions:['Heat fava beans in a pot until hot.','Mash garlic with salt, add to beans.','Stir in cumin and lemon juice.','Transfer to serving bowl, drizzle with olive oil.','Top with parsley, tomatoes, and onion.','Serve with pita bread and tahini.']
+                    instructions:['Heat fava beans in a pot until hot.','Mash garlic with salt, add to beans.','Stir in cumin and lemon juice.','Transfer to serving bowl, drizzle with olive oil.','Top with parsley, tomatoes, and onion.','Serve with pita bread and tahini.'],
+                    calories: 390, protein: 20, carbs: 48, fats: 14
                 },
                 { 
                     name:'Hotdog', 
@@ -684,7 +686,8 @@
                     emoji:'🌭', 
                     tags:['Easy','Quick','Kids Favorite'],
                     ingredients:['4 beef frankfurters','4 hotdog buns','Mustard','Ketchup','1 onion, thinly sliced and fried until crispy','Pickle relish or sliced pickles'],
-                    instructions:['Grill or boil frankfurters until heated through.','Toast buns lightly.','Place frankfurter in bun.','Top with mustard, ketchup, crispy onions, and pickles.','Serve immediately with fries.']
+                    instructions:['Grill or boil frankfurters until heated through.','Toast buns lightly.','Place frankfurter in bun.','Top with mustard, ketchup, crispy onions, and pickles.','Serve immediately with fries.'],
+                    calories: 420, protein: 15, carbs: 38, fats: 24
                 },
                 { 
                     name:'Kebda', 
@@ -697,7 +700,8 @@
                     emoji:'🥪', 
                     tags:['Easy','Oriental','Quick'],
                     ingredients:['500g beef liver, sliced thin','2 bell peppers, sliced','1 large onion, sliced','4 garlic cloves, minced','2 tbsp vinegar','1 tsp cumin','1/2 tsp chili powder','Salt and pepper','3 tbsp oil','Baladi bread or rolls','Tahini sauce for serving'],
-                    instructions:['Season liver with salt, pepper, and cumin.','Heat oil in large skillet over high heat.','Add liver in single layer, sear 1-2 minutes per side. Remove.','In same pan, sauté onions and peppers until soft.','Add garlic, cook 1 minute.','Return liver to pan, add vinegar and chili. Toss well.','Serve in bread with tahini sauce.']
+                    instructions:['Season liver with salt, pepper, and cumin.','Heat oil in large skillet over high heat.','Add liver in single layer, sear 1-2 minutes per side. Remove.','In same pan, sauté onions and peppers until soft.','Add garlic, cook 1 minute.','Return liver to pan, add vinegar and chili. Toss well.','Serve in bread with tahini sauce.'],
+                    calories: 480, protein: 32, carbs: 42, fats: 22
                 },
                 { 
                     name:'Koshary', 
@@ -710,7 +714,8 @@
                     emoji:'🍛', 
                     tags:['Medium','Oriental','Vegetarian'],
                     ingredients:['1 cup rice','1 cup brown lentils','1 cup macaroni','1 can chickpeas, drained','2 large onions, thinly sliced','4 garlic cloves, minced','2 cups tomato sauce','2 tbsp vinegar','1 tsp cumin','1 tsp chili flakes','Salt and pepper','Oil for frying'],
-                    instructions:['Cook lentils in boiling water until tender, about 20 minutes. Drain.','Cook rice according to package.','Cook macaroni according to package.','Fry onions until crispy and golden. Set aside.','For sauce: sauté garlic, add tomato sauce, vinegar, cumin, chili, salt. Simmer 10 minutes.','Layer in serving dish: rice, lentils, macaroni, chickpeas.','Top with tomato sauce and crispy onions. Serve.']
+                    instructions:['Cook lentils in boiling water until tender, about 20 minutes. Drain.','Cook rice according to package.','Cook macaroni according to package.','Fry onions until crispy and golden. Set aside.','For sauce: sauté garlic, add tomato sauce, vinegar, cumin, chili, salt. Simmer 10 minutes.','Layer in serving dish: rice, lentils, macaroni, chickpeas.','Top with tomato sauce and crispy onions. Serve.'],
+                    calories: 620, protein: 18, carbs: 108, fats: 15
                 },
                 { 
                     name:'Pizza', 
@@ -723,7 +728,8 @@
                     emoji:'🍕', 
                     tags:['Easy','Italian','Comfort Food'],
                     ingredients:['2 pizza dough balls','1 cup tomato sauce','200g fresh mozzarella, sliced','Fresh basil leaves','Olive oil','Salt and pepper','Optional toppings: pepperoni, mushrooms, olives'],
-                    instructions:['Preheat oven to highest setting (500°F) with pizza stone if available.','Roll out dough on floured surface.','Spread tomato sauce, leaving border.','Arrange mozzarella slices.','Drizzle with olive oil, season with salt and pepper.','Bake 10-12 minutes until crust is golden and cheese bubbles.','Top with fresh basil. Slice and serve.']
+                    instructions:['Preheat oven to highest setting (500°F) with pizza stone if available.','Roll out dough on floured surface.','Spread tomato sauce, leaving border.','Arrange mozzarella slices.','Drizzle with olive oil, season with salt and pepper.','Bake 10-12 minutes until crust is golden and cheese bubbles.','Top with fresh basil. Slice and serve.'],
+                    calories: 280, protein: 12, carbs: 32, fats: 12
                 },
                 { 
                     name:'Sojok', 
@@ -736,7 +742,8 @@
                     emoji:'🌭', 
                     tags:['Easy','Oriental','Spicy'],
                     ingredients:['8 sojok sausages (spicy Egyptian beef sausages)','4 baguettes or long rolls','2 bell peppers, sliced','1 onion, sliced','2 tbsp oil','Tahini sauce','Lemon juice','Parsley for garnish'],
-                    instructions:['Heat oil in skillet, add sausages. Cook until browned and cooked through.','In same pan, sauté peppers and onions until soft.','Warm baguettes.','Spread tahini sauce inside bread.','Layer sausages, peppers, and onions.','Sprinkle with lemon juice and parsley.','Serve hot.']
+                    instructions:['Heat oil in skillet, add sausages. Cook until browned and cooked through.','In same pan, sauté peppers and onions until soft.','Warm baguettes.','Spread tahini sauce inside bread.','Layer sausages, peppers, and onions.','Sprinkle with lemon juice and parsley.','Serve hot.'],
+                    calories: 520, protein: 22, carbs: 45, fats: 29
                 },
                 { 
                     name:'Tamiya', 
@@ -749,7 +756,8 @@
                     emoji:'🟢', 
                     tags:['Medium','Oriental','Vegetarian'],
                     ingredients:['2 cups dried split fava beans','1 large onion, quartered','4 garlic cloves','1 bunch parsley','1 bunch cilantro','1 tsp cumin','1 tsp coriander','1 tsp baking soda','Salt and pepper','Oil for frying','Pita bread, tomatoes, onions, tahini for serving'],
-                    instructions:['Soak fava beans overnight, drain well.','In food processor, grind beans with onion, garlic, herbs, and spices until smooth paste.','Add baking soda, mix well. Let rest 30 minutes.','Shape into small patties.','Heat oil to 350°F, fry until golden brown and crispy.','Drain on paper towels.','Serve in pita with tomatoes, onions, and tahini.']
+                    instructions:['Soak fava beans overnight, drain well.','In food processor, grind beans with onion, garlic, herbs, and spices until smooth paste.','Add baking soda, mix well. Let rest 30 minutes.','Shape into small patties.','Heat oil to 350°F, fry until golden brown and crispy.','Drain on paper towels.','Serve in pita with tomatoes, onions, and tahini.'],
+                    calories: 380, protein: 14, carbs: 38, fats: 20
                 }
             ]
         }
