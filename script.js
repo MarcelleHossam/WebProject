@@ -42,6 +42,12 @@
     const deleteRecipeBtn = document.getElementById('deleteRecipeBtn');
     const adminRecipeActions = document.getElementById('adminRecipeActions');
 
+        // NEW: Calorie display elements
+    const detailCalories = document.getElementById('detailCalories');
+    const detailProtein = document.getElementById('detailProtein');
+    const detailCarbs = document.getElementById('detailCarbs');
+    const detailFats = document.getElementById('detailFats');
+
     // Admin Panel Elements
     const adminPanel = document.getElementById('adminPanel');
     const closeAdminBtn = document.getElementById('closeAdminBtn');
