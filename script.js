@@ -788,7 +788,7 @@
         );
     }
 
-    // ==========  ADMIN CATEGORY MANAGEMENT ==========
+    // ========== ADMIN CATEGORY MANAGEMENT - FIXED ==========
     function loadAdminCategories() {
         const list = document.getElementById('categoriesList');
         if (!list) return;
@@ -873,7 +873,7 @@
         };
     }
 
-    // ========== ADMIN RECIPE MANAGEMENT ==========
+    // ========== ADMIN RECIPE MANAGEMENT - FIXED ==========
     function loadAdminRecipes() {
         const list = document.getElementById('recipesList');
         if (!list) return;
@@ -890,16 +890,16 @@
                     if (recipe && recipe.name) {
                         hasRecipes = true;
                         html += `<div class="admin-list-item">
-    <div class="admin-item-info">
-        <h4>${recipe.name} <small>(${categories[catKey].name})</small></h4>
-        <p>🔥 ${recipe.calories} kcal | 💪 ${recipe.protein}g P | 🍚 ${recipe.carbs}g C | 🥑 ${recipe.fats}g F</p>
-        <p>${recipe.description ? recipe.description.substring(0, 60) : ''}...</p>
-    </div>
-    <div class="admin-item-actions">
-        <button class="admin-item-btn edit" onclick="editRecipe('${catKey}', ${index})"><i class="fas fa-edit"></i></button>
-        <button class="admin-item-btn delete" onclick="deleteRecipe('${catKey}', ${index})"><i class="fas fa-trash"></i></button>
-    </div>
-</div>`;
+                            <div class="admin-item-info">
+                                <h4>${recipe.name} <small>(${categories[catKey].name})</small></h4>
+                                <p>🔥 ${recipe.calories} kcal | 💪 ${recipe.protein}g P | 🍚 ${recipe.carbs}g C | 🥑 ${recipe.fats}g F</p>
+                                <p>${recipe.description ? recipe.description.substring(0, 60) : ''}...</p>
+                            </div>
+                            <div class="admin-item-actions">
+                                <button class="admin-item-btn edit" onclick="editRecipe('${catKey}', ${index})"><i class="fas fa-edit"></i></button>
+                                <button class="admin-item-btn delete" onclick="deleteRecipe('${catKey}', ${index})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>`;
                     }
                 });
             }
@@ -956,7 +956,7 @@
         document.getElementById('recipeTags').value = recipe.tags.join(', ');
         document.getElementById('recipeIngredients').value = recipe.ingredients.join('\n');
         document.getElementById('recipeInstructions').value = recipe.instructions.join('\n');
-                
+        
         // Load calorie values
         if (document.getElementById('recipeCalories')) {
             document.getElementById('recipeCalories').value = recipe.calories || 400;
@@ -964,6 +964,7 @@
             document.getElementById('recipeCarbs').value = recipe.carbs || 40;
             document.getElementById('recipeFats').value = recipe.fats || 15;
         }
+        
         openModal('recipeModal');
     };
 
@@ -990,22 +991,22 @@
         }
         
         const recipe = {
-    name: document.getElementById('recipeName').value.trim(),
-    arabic: document.getElementById('recipeArabic').value.trim(),
-    description: document.getElementById('recipeDescription').value.trim(),
-    time: document.getElementById('recipeTime').value.trim(),
-    difficulty: document.getElementById('recipeDifficulty').value,
-    servings: document.getElementById('recipeServings').value.trim(),
-    emoji: document.getElementById('recipeEmoji').value.trim(),
-    img: document.getElementById('recipeImage').value.trim() || null,
-    tags: document.getElementById('recipeTags').value.split(',').map(t => t.trim()),
-    ingredients: document.getElementById('recipeIngredients').value.split('\n').filter(i => i.trim()),
-    instructions: document.getElementById('recipeInstructions').value.split('\n').filter(i => i.trim()),
-    calories: parseInt(document.getElementById('recipeCalories')?.value) || 400,
-    protein: parseInt(document.getElementById('recipeProtein')?.value) || 20,
-    carbs: parseInt(document.getElementById('recipeCarbs')?.value) || 40,
-    fats: parseInt(document.getElementById('recipeFats')?.value) || 15
-};
+            name: document.getElementById('recipeName').value.trim(),
+            arabic: document.getElementById('recipeArabic').value.trim(),
+            description: document.getElementById('recipeDescription').value.trim(),
+            time: document.getElementById('recipeTime').value.trim(),
+            difficulty: document.getElementById('recipeDifficulty').value,
+            servings: document.getElementById('recipeServings').value.trim(),
+            emoji: document.getElementById('recipeEmoji').value.trim(),
+            img: document.getElementById('recipeImage').value.trim() || null,
+            tags: document.getElementById('recipeTags').value.split(',').map(t => t.trim()),
+            ingredients: document.getElementById('recipeIngredients').value.split('\n').filter(i => i.trim()),
+            instructions: document.getElementById('recipeInstructions').value.split('\n').filter(i => i.trim()),
+            calories: parseInt(document.getElementById('recipeCalories')?.value) || 400,
+            protein: parseInt(document.getElementById('recipeProtein')?.value) || 20,
+            carbs: parseInt(document.getElementById('recipeCarbs')?.value) || 40,
+            fats: parseInt(document.getElementById('recipeFats')?.value) || 15
+        };
         
         if (id === '') {
             categories[catKey].dishes.push(recipe);
@@ -1043,7 +1044,7 @@
             document.getElementById('recipeServings').value = '4 servings';
             document.getElementById('recipeDifficulty').value = 'Easy';
             document.getElementById('recipeEmoji').value = '🍽️';
-                        
+            
             // Set default calorie values
             if (document.getElementById('recipeCalories')) {
                 document.getElementById('recipeCalories').value = '400';
@@ -1051,6 +1052,7 @@
                 document.getElementById('recipeCarbs').value = '40';
                 document.getElementById('recipeFats').value = '15';
             }
+            
             openModal('recipeModal');
         };
     }
@@ -1059,7 +1061,7 @@
         recipeCategoryFilter.addEventListener('change', loadAdminRecipes);
     }
 
-    // ==========   ADMIN COMMENT MANAGEMENT ==========
+    // ========== ADMIN COMMENT MANAGEMENT ==========
     let comments = JSON.parse(localStorage.getItem('recipeComments')) || {};
 
     function saveComments() {
@@ -1069,7 +1071,7 @@
     }
 
     function loadAdminComments() {
-       const list = document.getElementById('adminCommentsList');
+        const list = document.getElementById('adminCommentsList');
         if (!list) return;
         const filter = commentRecipeFilter?.value || '';
         let html = '';
@@ -1127,7 +1129,7 @@
                 categories[key].dishes.forEach(recipe => {
                     if (recipe && recipe.name) {
                         const recipeKey = key + '_' + recipe.name;
-                       options += `<option value="${recipeKey}">${recipe.name} (${categories[key].name}) 🔥 ${recipe.calories}kcal</option>`;
+                        options += `<option value="${recipeKey}">${recipe.name} (${categories[key].name}) 🔥 ${recipe.calories}kcal</option>`;
                     }
                 });
             }
@@ -1200,6 +1202,7 @@
         showNotif('Comment added!');
     }
 
+    // ========== UPDATED updateCommentsUI FUNCTION ==========
     function updateCommentsUI() {
         if (!currentRecipe) return;
         
@@ -1207,8 +1210,15 @@
         const list = comments[key] || [];
         commentCount.textContent = list.length + ' comment' + (list.length !== 1 ? 's' : '');
         
+        // Clear the comments container completely
+        commentsDiv.innerHTML = '';
+        
         if (list.length === 0) {
-            commentsDiv.innerHTML = '<div class="no-comments">No comments yet. Be the first to share your experience!</div>';
+            // Show only one "no comments" message
+            const noCommentsDiv = document.createElement('div');
+            noCommentsDiv.className = 'no-comments';
+            noCommentsDiv.textContent = 'No comments yet. Be the first to share your experience!';
+            commentsDiv.appendChild(noCommentsDiv);
         } else {
             let html = '';
             list.forEach(c => {
@@ -1315,9 +1325,6 @@
 
     // ========== FAVORITES ==========
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        // Calorie filter variables
-    let activeCalorieFilter = { min: 0, max: 680 };
-    let isCalorieSearchVisible = false;
     let currentRecipe = null;
     let currentCat = null;
 
@@ -1424,11 +1431,13 @@
                     <div class="recipe-name-grid">${dish.name}</div>
                     <div class="recipe-name-arabic">${dish.arabic}</div>
                     <div class="recipe-description">${dish.description.substring(0,80)}...</div>
-                    <div class="recipe-meta-grid">
-    <span class="time-badge">⏱️ ${dish.time}</span>
-    <span class="difficulty-badge">⚖️ ${dish.difficulty}</span>
-    <span class="recipe-calorie-badge"><i class="fas fa-fire"></i> ${dish.calories} kcal</span>
-</div>
+                                        <div class="recipe-meta-grid">
+                        <span class="time-badge">⏱️ ${dish.time}</span>
+                        <span class="difficulty-badge">⚖️ ${dish.difficulty}</span>
+                        <span class="recipe-calorie-badge"><i class="fas fa-fire"></i> ${dish.calories} kcal</span>
+                    </div>
+
+
                     <div class="servings">${dish.servings}</div>
                     ${favIconHtml}
                 </div>
@@ -1480,6 +1489,7 @@
         if (detailProtein) detailProtein.textContent = dish.protein;
         if (detailCarbs) detailCarbs.textContent = dish.carbs;
         if (detailFats) detailFats.textContent = dish.fats;
+
         let tagsHtml = '';
         dish.tags.forEach(t => {
             let ic = 'fas fa-tag';
@@ -1614,7 +1624,94 @@
             }
         };
     }
+
+    // ========== HELPER FUNCTIONS ==========
+    function updateCommentForm() {
+        if (loggedIn) {
+            loginPrompt.style.display = 'none';
+            postComment.style.display = 'block';
+            commentText.disabled = false;
+            commentText.placeholder = 'Write your comment...';
+        } else {
+            loginPrompt.style.display = 'block';
+            postComment.style.display = 'none';
+            commentText.disabled = true;
+            commentText.placeholder = 'Please sign in to leave a comment';
+        }
+    }
+
+    function updateAuthButtons() {
+        if (loggedIn) {
+            mainSignup.style.display = 'none';
+            mainLogin.style.display = 'none';
+            signOutBtn.style.display = 'inline-flex';
+            if (isAdmin) {
+                mainAdmin.style.display = 'none';
+            } else {
+                mainAdmin.style.display = 'inline-flex';
+            }
+        } else {
+            mainSignup.style.display = 'inline-flex';
+            mainLogin.style.display = 'inline-flex';
+            mainAdmin.style.display = 'inline-flex';
+            signOutBtn.style.display = 'none';
+        }
+    }
+
+    function showMainApp(asAdmin) {
+        hero.style.display = 'none';
+        signin.style.display = 'none';
+        mainApp.style.display = 'block';
+        setTimeout(() => mainApp.style.opacity = '1', 30);
+    }
+
+    function showNotif(msg) {
+        const n = document.createElement('div');
+        n.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#ffd8b0;color:#4a2f1f;padding:15px 25px;border-radius:50px;box-shadow:0 5px 15px rgba(0,0,0,0.2);z-index:2000;font-weight:600;border:2px solid #ca9f7c;animation:slideIn 0.3s ease;';
+        n.textContent = msg;
+        document.body.appendChild(n);
+        setTimeout(() => {
+            n.style.animation = 'slideIn 0.3s ease reverse';
+            setTimeout(() => {
+                if (n.parentNode) document.body.removeChild(n);
+            }, 300);
+        }, 3000);
+    }
+
+    // ========== EVENT LISTENERS ==========
+    if (signupBtn) signupBtn.onclick = () => openModal('signupModal');
+    if (loginBtn) loginBtn.onclick = () => openModal('loginModal');
+    if (mainSignup) mainSignup.onclick = () => openModal('signupModal');
+    if (mainLogin) mainLogin.onclick = () => openModal('loginModal');
+    if (signOutBtn) signOutBtn.onclick = handleSignOut;
+    if (mainAdmin) mainAdmin.onclick = () => openModal('adminLoginModal');
+    if (adminLink) {
+        adminLink.onclick = (e) => {
+            e.preventDefault();
+            openModal('adminLoginModal');
+        };
+    }
+
+    if (closeAdminBtn) {
+        closeAdminBtn.onclick = hideAdminPanel;
+    }
+
+    if (signInLink) {
+        signInLink.onclick = (e) => {
+            e.preventDefault();
+            openModal('loginModal');
+        };
+    }
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    };
+
     // ========== CALORIE SEARCH FUNCTIONALITY ==========
+    let activeCalorieFilter = { min: 0, max: 680 };
+    let isCalorieSearchVisible = false;
     
     // Toggle calorie search visibility
     const calorieToggleBtn = document.getElementById('calorieToggleBtn');
@@ -1722,7 +1819,7 @@
             existingNoResults.remove();
         }
         
-        // Show "no results" message if needed
+        // Show "no results" message if needed (NO COMBINATIONS)
         if (visibleCount === 0 && recipeCards.length > 0) {
             const container = document.getElementById('categoriesContainer');
             if (container) {
@@ -1810,108 +1907,31 @@
             if (e.key === 'Enter') filterRecipesByCalories();
         });
     }
-    // ========== HELPER FUNCTIONS ==========
-    function updateCommentForm() {
-        if (loggedIn) {
-            loginPrompt.style.display = 'none';
-            postComment.style.display = 'block';
-            commentText.disabled = false;
-            commentText.placeholder = 'Write your comment...';
-        } else {
-            loginPrompt.style.display = 'block';
-            postComment.style.display = 'none';
-            commentText.disabled = true;
-            commentText.placeholder = 'Please sign in to leave a comment';
-        }
-    }
-
-    function updateAuthButtons() {
-        if (loggedIn) {
-            mainSignup.style.display = 'none';
-            mainLogin.style.display = 'none';
-            signOutBtn.style.display = 'inline-flex';
-            if (isAdmin) {
-                mainAdmin.style.display = 'none';
-            } else {
-                mainAdmin.style.display = 'inline-flex';
-            }
-        } else {
-            mainSignup.style.display = 'inline-flex';
-            mainLogin.style.display = 'inline-flex';
-            mainAdmin.style.display = 'inline-flex';
-            signOutBtn.style.display = 'none';
-        }
-    }
-
-    function showMainApp(asAdmin) {
-        hero.style.display = 'none';
-        signin.style.display = 'none';
-        mainApp.style.display = 'block';
-        setTimeout(() => mainApp.style.opacity = '1', 30);
-    }
-
-    function showNotif(msg) {
-        const n = document.createElement('div');
-        n.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#ffd8b0;color:#4a2f1f;padding:15px 25px;border-radius:50px;box-shadow:0 5px 15px rgba(0,0,0,0.2);z-index:2000;font-weight:600;border:2px solid #ca9f7c;animation:slideIn 0.3s ease;';
-        n.textContent = msg;
-        document.body.appendChild(n);
-        setTimeout(() => {
-            n.style.animation = 'slideIn 0.3s ease reverse';
-            setTimeout(() => {
-                if (n.parentNode) document.body.removeChild(n);
-            }, 300);
-        }, 3000);
-    }
-
-    // ========== EVENT LISTENERS ==========
-    if (signupBtn) signupBtn.onclick = () => openModal('signupModal');
-    if (loginBtn) loginBtn.onclick = () => openModal('loginModal');
-    if (mainSignup) mainSignup.onclick = () => openModal('signupModal');
-    if (mainLogin) mainLogin.onclick = () => openModal('loginModal');
-    if (signOutBtn) signOutBtn.onclick = handleSignOut;
-    if (mainAdmin) mainAdmin.onclick = () => openModal('adminLoginModal');
-    if (adminLink) {
-        adminLink.onclick = (e) => {
-            e.preventDefault();
-            openModal('adminLoginModal');
-        };
-    }
-
-    if (closeAdminBtn) {
-        closeAdminBtn.onclick = hideAdminPanel;
-    }
-
-    if (signInLink) {
-        signInLink.onclick = (e) => {
-            e.preventDefault();
-            openModal('loginModal');
-        };
-    }
-
-    window.onclick = function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = 'none';
-        }
-    };
 
     // ========== FIXED ADMIN TABS ==========
     if (adminTabs && adminTabs.length > 0) {
         adminTabs.forEach(tab => {
             tab.addEventListener('click', function() {
+                // Remove active class from all tabs
                 adminTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
                 this.classList.add('active');
                 
+                // Get tab name
                 const tabName = this.dataset.tab;
                 
+                // Hide all tab contents
                 document.querySelectorAll('.admin-tab-content').forEach(content => {
                     content.classList.remove('active');
                 });
                 
+                // Show selected tab content
                 const contentId = 'admin' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
                 const selectedContent = document.getElementById(contentId);
                 if (selectedContent) {
                     selectedContent.classList.add('active');
                     
+                    // Load data based on selected tab
                     if (tabName === 'categories') {
                         loadAdminCategories();
                     } else if (tabName === 'recipes') {
@@ -1925,6 +1945,7 @@
             });
         });
         
+        // Trigger click on first tab to show it by default
         setTimeout(() => {
             if (adminTabs[0]) {
                 adminTabs[0].click();
@@ -1950,100 +1971,3 @@
     updateAuthButtons();
     saveCategories();
 })();
-
-// ========== PASSWORD SHOW/HIDE FUNCTIONALITY ==========
-function initPasswordToggles() {
-    const passwordFields = document.querySelectorAll('input[type="password"]');
-    
-    passwordFields.forEach(field => {
-        if (field.hasAttribute('data-password-toggle')) return;
-        field.setAttribute('data-password-toggle', 'true');
-        
-        let wrapper = field.parentElement;
-        if (!wrapper.classList.contains('password-field-wrapper')) {
-            wrapper = document.createElement('div');
-            wrapper.className = 'password-field-wrapper';
-            field.parentNode.insertBefore(wrapper, field);
-            wrapper.appendChild(field);
-        }
-        
-        if (wrapper.querySelector('.password-toggle-btn')) return;
-        
-        const toggleBtn = document.createElement('button');
-        toggleBtn.type = 'button';
-        toggleBtn.className = 'password-toggle-btn';
-        toggleBtn.innerHTML = '<i class="far fa-eye-slash"></i>';
-        toggleBtn.setAttribute('title', 'Show password');
-        toggleBtn.setAttribute('aria-label', 'Show password');
-        
-        toggleBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (field.type === 'password') {
-                field.type = 'text';
-                this.innerHTML = '<i class="far fa-eye"></i>';
-                this.setAttribute('title', 'Hide password');
-                this.setAttribute('aria-label', 'Hide password');
-            } else {
-                field.type = 'password';
-                this.innerHTML = '<i class="far fa-eye-slash"></i>';
-                this.setAttribute('title', 'Show password');
-                this.setAttribute('aria-label', 'Show password');
-            }
-            
-            field.focus();
-        });
-        
-        wrapper.appendChild(toggleBtn);
-    });
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initPasswordToggles, 100);
-});
-
-// Initialize when modals open
-const originalOpenModal = window.openModal;
-window.openModal = function(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'flex';
-        setTimeout(function() {
-            initPasswordToggles();
-        }, 150);
-    }
-};
-
-// Re-initialize when any modal content changes
-const modalObserver = new MutationObserver(function(mutations) {
-    let needsInit = false;
-    
-    mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1) {
-                    if (node.querySelector && node.querySelector('input[type="password"]')) {
-                        needsInit = true;
-                    }
-                }
-            });
-        }
-    });
-    
-    if (needsInit) {
-        setTimeout(initPasswordToggles, 50);
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    modalObserver.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-});
-
-window.addEventListener('load', function() {
-    initPasswordToggles();
-});
