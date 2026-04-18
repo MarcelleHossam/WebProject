@@ -1069,7 +1069,7 @@
     }
 
     function loadAdminComments() {
-        const list = document.getElementById('commentsList');
+       const list = document.getElementById('adminCommentsList');
         if (!list) return;
         const filter = commentRecipeFilter?.value || '';
         let html = '';
@@ -1127,7 +1127,7 @@
                 categories[key].dishes.forEach(recipe => {
                     if (recipe && recipe.name) {
                         const recipeKey = key + '_' + recipe.name;
-                        options += `<option value="${recipeKey}">${recipe.name} (${categories[key].name})</option>`;
+                       options += `<option value="${recipeKey}">${recipe.name} (${categories[key].name}) 🔥 ${recipe.calories}kcal</option>`;
                     }
                 });
             }
