@@ -1597,6 +1597,9 @@
     }
 
     // ========== HELPER FUNCTIONS ==========
+        // Calorie filter variables
+    let activeCalorieFilter = { min: 0, max: 680 };
+    let isCalorieSearchVisible = false;
     function updateCommentForm() {
         if (loggedIn) {
             loginPrompt.style.display = 'none';
