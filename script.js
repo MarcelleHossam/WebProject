@@ -889,16 +889,17 @@
                 categories[catKey].dishes.forEach((recipe, index) => {
                     if (recipe && recipe.name) {
                         hasRecipes = true;
-                        html += `<div class="admin-list-item">
-                            <div class="admin-item-info">
-                                <h4>${recipe.name} <small>(${categories[catKey].name})</small></h4>
-                                <p>${recipe.description ? recipe.description.substring(0, 60) : ''}...</p>
-                            </div>
-                            <div class="admin-item-actions">
-                                <button class="admin-item-btn edit" onclick="editRecipe('${catKey}', ${index})"><i class="fas fa-edit"></i></button>
-                                <button class="admin-item-btn delete" onclick="deleteRecipe('${catKey}', ${index})"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>`;
+html += `<div class="admin-list-item">
+    <div class="admin-item-info">
+        <h4>${recipe.name} <small>(${categories[catKey].name})</small></h4>
+        <p>🔥 ${recipe.calories} kcal | 💪 ${recipe.protein}g P | 🍚 ${recipe.carbs}g C | 🥑 ${recipe.fats}g F</p>
+        <p>${recipe.description ? recipe.description.substring(0, 60) : ''}...</p>
+    </div>
+    <div class="admin-item-actions">
+        <button class="admin-item-btn edit" onclick="editRecipe('${catKey}', ${index})"><i class="fas fa-edit"></i></button>
+        <button class="admin-item-btn delete" onclick="deleteRecipe('${catKey}', ${index})"><i class="fas fa-trash"></i></button>
+    </div>
+</div>`;
                     }
                 });
             }
