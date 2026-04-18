@@ -1043,7 +1043,14 @@
             document.getElementById('recipeServings').value = '4 servings';
             document.getElementById('recipeDifficulty').value = 'Easy';
             document.getElementById('recipeEmoji').value = '🍽️';
-            
+                        
+            // Set default calorie values
+            if (document.getElementById('recipeCalories')) {
+                document.getElementById('recipeCalories').value = '400';
+                document.getElementById('recipeProtein').value = '20';
+                document.getElementById('recipeCarbs').value = '40';
+                document.getElementById('recipeFats').value = '15';
+            }
             openModal('recipeModal');
         };
     }
