@@ -1402,7 +1402,11 @@
                     <div class="recipe-name-grid">${dish.name}</div>
                     <div class="recipe-name-arabic">${dish.arabic}</div>
                     <div class="recipe-description">${dish.description.substring(0,80)}...</div>
-                    <div class="recipe-meta-grid"><span class="time-badge">⏱️ ${dish.time}</span><span class="difficulty-badge">⚖️ ${dish.difficulty}</span></div>
+                    <div class="recipe-meta-grid">
+    <span class="time-badge">⏱️ ${dish.time}</span>
+    <span class="difficulty-badge">⚖️ ${dish.difficulty}</span>
+    <span class="recipe-calorie-badge"><i class="fas fa-fire"></i> ${dish.calories} kcal</span>
+</div>
                     <div class="servings">${dish.servings}</div>
                     ${favIconHtml}
                 </div>
