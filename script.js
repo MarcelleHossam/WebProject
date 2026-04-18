@@ -1595,7 +1595,202 @@
             }
         };
     }
+    // ========== CALORIE SEARCH FUNCTIONALITY ==========
+    
+    // Toggle calorie search visibility
+    const calorieToggleBtn = document.getElementById('calorieToggleBtn');
+    const calorieSearchContainer = document.getElementById('calorieSearchContainer');
+    
+    if (calorieToggleBtn) {
+        calorieToggleBtn.addEventListener('click', function() {
+            isCalorieSearchVisible = !isCalorieSearchVisible;
+            if (isCalorieSearchVisible) {
+                calorieSearchContainer.style.display = 'block';
+                calorieToggleBtn.classList.add('active');
+            } else {
+                calorieSearchContainer.style.display = 'none';
+                calorieToggleBtn.classList.remove('active');
+            }
+        });
+    }
+    
+    function filterRecipesByCalories() {
+        let min = parseInt(document.getElementById('calorieMin')?.value) || 0;
+        let max = parseInt(document.getElementById('calorieMax')?.value) || 680;
+        
+        // ========== VALIDATIONS ==========
+        
+        // Validation 1: No negative numbers
+        if (min < 0) {
+            showNotif('❌ Minimum calories cannot be negative! Please enter 0 or higher.');
+            document.getElementById('calorieMin').value = 0;
+            return;
+        }
+        
+        if (max < 0) {
+            showNotif('❌ Maximum calories cannot be negative! Please enter 0 or higher.');
+            document.getElementById('calorieMax').value = 0;
+            return;
+        }
+        
+        // Validation 2: Max cannot exceed highest recipe calorie (680)
+        if (max > 680) {
+            showNotif('❌ Maximum calories cannot exceed 680 (highest recipe calorie)! Please enter a lower value.');
+            document.getElementById('calorieMax').value = 680;
+            return;
+        }
+        
+        // Validation 3: Min cannot be greater than Max
+        if (min > max) {
+            showNotif('❌ Minimum calories cannot be greater than Maximum calories! Please adjust your range.');
+            return;
+        }
+        
+        // Validation 4: Min cannot equal Max (must be a range)
+        if (min === max) {
+            showNotif('⚠️ Please enter a calorie range (min and max should be different). For example: 0-300 or 300-600');
+            return;
+        }
+        
+        // Validation 5: Both cannot be 0
+        if (min === 0 && max === 0) {
+            showNotif('⚠️ Please enter a valid calorie range. Min and max cannot both be 0!');
+            return;
+        }
+        
+        activeCalorieFilter = { min, max };
+        
+        // Update display text
+        const rangeDisplay = document.getElementById('calorieRangeDisplay');
+        if (rangeDisplay) {
+            rangeDisplay.textContent = `${min} - ${max}`;
+        }
+        
+        // Show filter badge on toggle button
+        const filterBadge = document.querySelector('.calorie-toggle-btn .filter-badge');
+        if (filterBadge) {
+            if (min !== 0 || max !== 680) {
+                filterBadge.textContent = `⚡ ${min}-${max} kcal`;
+                filterBadge.classList.add('show');
+            } else {
+                filterBadge.classList.remove('show');
+            }
+        }
+        
+        // Get all recipe cards
+        const recipeCards = document.querySelectorAll('.recipe-card-grid');
+        let visibleCount = 0;
+        
+        // Filter recipes that match the calorie range
+        recipeCards.forEach(card => {
+            const calorieBadge = card.querySelector('.recipe-calorie-badge');
+            if (calorieBadge) {
+                const calorieText = calorieBadge.textContent;
+                const calories = parseInt(calorieText.match(/\d+/)?.[0]) || 0;
+                
+                if (calories >= min && calories <= max) {
+                    card.classList.remove('filtered-out');
+                    visibleCount++;
+                } else {
+                    card.classList.add('filtered-out');
+                }
+            }
+        });
+        
+        // Remove any existing messages
+        const existingNoResults = document.querySelector('.no-results-message');
+        if (existingNoResults) {
+            existingNoResults.remove();
+        }
+        
+        // Show "no results" message if needed
+        if (visibleCount === 0 && recipeCards.length > 0) {
+            const container = document.getElementById('categoriesContainer');
+            if (container) {
+                const noResultsDiv = document.createElement('div');
+                noResultsDiv.className = 'no-results-message';
+                noResultsDiv.innerHTML = `
+                    <i class="fas fa-search"></i>
+                    <p>No recipes found between ${min} - ${max} calories</p>
+                    <p style="font-size: 1rem; margin-top: 10px;">Try adjusting your calorie range!</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">💡 Available calorie range: 0 - 680 calories</p>
+                `;
+                container.appendChild(noResultsDiv);
+            }
+        }
+        
+        // Show notification
+        if (visibleCount > 0) {
+            showNotif(`🔥 Showing ${visibleCount} recipe${visibleCount !== 1 ? 's' : ''} between ${min} - ${max} calories`);
+        }
+    }
 
+    function clearCalorieFilter() {
+        // Get the input elements
+        const minInput = document.getElementById('calorieMin');
+        const maxInput = document.getElementById('calorieMax');
+        
+        // Reset values to default
+        if (minInput) minInput.value = '0';
+        if (maxInput) maxInput.value = '680';
+        
+        // Reset the active filter
+        activeCalorieFilter = { min: 0, max: 680 };
+        
+        // Update the display text
+        const rangeDisplay = document.getElementById('calorieRangeDisplay');
+        if (rangeDisplay) {
+            rangeDisplay.textContent = '0 - 680';
+        }
+        
+        // Hide the filter badge on the toggle button
+        const filterBadge = document.querySelector('.calorie-toggle-btn .filter-badge');
+        if (filterBadge) {
+            filterBadge.classList.remove('show');
+        }
+        
+        // Show ALL recipe cards (remove filtered-out class)
+        const recipeCards = document.querySelectorAll('.recipe-card-grid');
+        recipeCards.forEach(card => {
+            card.classList.remove('filtered-out');
+        });
+        
+        // Remove any "no results" message
+        const noResults = document.querySelector('.no-results-message');
+        if (noResults) {
+            noResults.remove();
+        }
+        
+        // Show notification
+        showNotif('✨ Calorie filter cleared. Showing all recipes!');
+    }
+
+    // Add event listeners for calorie search
+    const applyFilterBtn = document.getElementById('applyCalorieFilter');
+    const clearFilterBtn = document.getElementById('clearCalorieFilter');
+    const calorieMinInput = document.getElementById('calorieMin');
+    const calorieMaxInput = document.getElementById('calorieMax');
+    
+    if (applyFilterBtn) {
+        applyFilterBtn.addEventListener('click', filterRecipesByCalories);
+    }
+
+    if (clearFilterBtn) {  
+        clearFilterBtn.addEventListener('click', clearCalorieFilter);
+    }
+    
+    // Optional: Filter as you type (with Enter key)
+    if (calorieMinInput) {
+        calorieMinInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') filterRecipesByCalories();
+        });
+    }
+    
+    if (calorieMaxInput) {
+        calorieMaxInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') filterRecipesByCalories();
+        });
+    }
     // ========== HELPER FUNCTIONS ==========
     function updateCommentForm() {
         if (loggedIn) {
