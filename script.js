@@ -1449,6 +1449,11 @@
         detailArabic.textContent = dish.arabic;
         detailDesc.textContent = dish.description;
 
+        // Display calories and macros
+        if (detailCalories) detailCalories.textContent = dish.calories;
+        if (detailProtein) detailProtein.textContent = dish.protein;
+        if (detailCarbs) detailCarbs.textContent = dish.carbs;
+        if (detailFats) detailFats.textContent = dish.fats;
         let tagsHtml = '';
         dish.tags.forEach(t => {
             let ic = 'fas fa-tag';
