@@ -956,7 +956,14 @@
         document.getElementById('recipeTags').value = recipe.tags.join(', ');
         document.getElementById('recipeIngredients').value = recipe.ingredients.join('\n');
         document.getElementById('recipeInstructions').value = recipe.instructions.join('\n');
-        
+                
+        // Load calorie values
+        if (document.getElementById('recipeCalories')) {
+            document.getElementById('recipeCalories').value = recipe.calories || 400;
+            document.getElementById('recipeProtein').value = recipe.protein || 20;
+            document.getElementById('recipeCarbs').value = recipe.carbs || 40;
+            document.getElementById('recipeFats').value = recipe.fats || 15;
+        }
         openModal('recipeModal');
     };
 
