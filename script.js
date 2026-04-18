@@ -983,18 +983,22 @@
         }
         
         const recipe = {
-            name: document.getElementById('recipeName').value.trim(),
-            arabic: document.getElementById('recipeArabic').value.trim(),
-            description: document.getElementById('recipeDescription').value.trim(),
-            time: document.getElementById('recipeTime').value.trim(),
-            difficulty: document.getElementById('recipeDifficulty').value,
-            servings: document.getElementById('recipeServings').value.trim(),
-            emoji: document.getElementById('recipeEmoji').value.trim(),
-            img: document.getElementById('recipeImage').value.trim() || null,
-            tags: document.getElementById('recipeTags').value.split(',').map(t => t.trim()),
-            ingredients: document.getElementById('recipeIngredients').value.split('\n').filter(i => i.trim()),
-            instructions: document.getElementById('recipeInstructions').value.split('\n').filter(i => i.trim())
-        };
+    name: document.getElementById('recipeName').value.trim(),
+    arabic: document.getElementById('recipeArabic').value.trim(),
+    description: document.getElementById('recipeDescription').value.trim(),
+    time: document.getElementById('recipeTime').value.trim(),
+    difficulty: document.getElementById('recipeDifficulty').value,
+    servings: document.getElementById('recipeServings').value.trim(),
+    emoji: document.getElementById('recipeEmoji').value.trim(),
+    img: document.getElementById('recipeImage').value.trim() || null,
+    tags: document.getElementById('recipeTags').value.split(',').map(t => t.trim()),
+    ingredients: document.getElementById('recipeIngredients').value.split('\n').filter(i => i.trim()),
+    instructions: document.getElementById('recipeInstructions').value.split('\n').filter(i => i.trim()),
+    calories: parseInt(document.getElementById('recipeCalories')?.value) || 400,
+    protein: parseInt(document.getElementById('recipeProtein')?.value) || 20,
+    carbs: parseInt(document.getElementById('recipeCarbs')?.value) || 40,
+    fats: parseInt(document.getElementById('recipeFats')?.value) || 15
+};
         
         if (id === '') {
             categories[catKey].dishes.push(recipe);
