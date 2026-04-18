@@ -42,7 +42,7 @@
     const deleteRecipeBtn = document.getElementById('deleteRecipeBtn');
     const adminRecipeActions = document.getElementById('adminRecipeActions');
 
-        // NEW: Calorie display elements
+    // NEW: Calorie display elements
     const detailCalories = document.getElementById('detailCalories');
     const detailProtein = document.getElementById('detailProtein');
     const detailCarbs = document.getElementById('detailCarbs');
@@ -62,6 +62,7 @@
     const recipeForm = document.getElementById('recipeForm');
     const adminLoginModal = document.getElementById('adminLoginModal');
 
+    // ========== ADMIN AUTHENTICATION ==========
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'admin123';
     let isAdmin = false;
@@ -112,9 +113,6 @@
 
     window.openModal = function(modalId) {
         document.getElementById(modalId).style.display = 'flex';
-        setTimeout(function() {
-            initPasswordToggles();
-        }, 150);
     };
 
     window.closeModal = function(modalId) {
@@ -233,7 +231,7 @@
         showNotif('You have been signed out.');
     };
 
-    // ========== Marcelle Healthy recipes section  ==========
+    // ========== COMPLETE RECIPE DATA - ALL 36 RECIPES WITH CALORIES ==========
     const categories = {
         healthy: { 
             name: 'Healthy', 
@@ -250,7 +248,8 @@
                     emoji:'🥞', 
                     tags:['Easy','Breakfast','Gluten-Free Option'],
                     ingredients:['2 ripe bananas, mashed','1 cup rolled oats','2 eggs','1/2 cup milk (any kind)','1 tsp baking powder','1 tsp vanilla extract','1/2 tsp cinnamon','Pinch of salt','Maple syrup for serving'],
-                    instructions:['Place oats in blender and pulse until flour-like consistency.','Add mashed bananas, eggs, milk, baking powder, vanilla, cinnamon, and salt.','Blend until smooth. Let batter rest 5 minutes.','Heat non-stick pan over medium heat, lightly grease.','Pour 1/4 cup batter for each pancake.','Cook until bubbles form, flip and cook until golden.','Serve with fresh fruit and maple syrup.']
+                    instructions:['Place oats in blender and pulse until flour-like consistency.','Add mashed bananas, eggs, milk, baking powder, vanilla, cinnamon, and salt.','Blend until smooth. Let batter rest 5 minutes.','Heat non-stick pan over medium heat, lightly grease.','Pour 1/4 cup batter for each pancake.','Cook until bubbles form, flip and cook until golden.','Serve with fresh fruit and maple syrup.'],
+                    calories: 320, protein: 12, carbs: 48, fats: 9
                 },
                 { 
                     name:'Grilled Chicken', 
@@ -263,7 +262,8 @@
                     emoji:'🍗', 
                     tags:['Easy','Grilled','High Protein'],
                     ingredients:['4 boneless skinless chicken breasts','3 tbsp olive oil','2 lemons, juiced','4 garlic cloves, minced','1 tbsp fresh rosemary, chopped','1 tbsp fresh thyme, chopped','1 tsp salt','1/2 tsp black pepper','1 tsp paprika'],
-                    instructions:['In a bowl, mix olive oil, lemon juice, garlic, herbs, salt, pepper, and paprika.','Add chicken, coat well. Cover and marinate for at least 30 minutes (up to 4 hours).','Preheat grill to medium-high heat.','Grill chicken 6-7 minutes per side until cooked through.','Let rest 5 minutes before serving.','Serve with grilled vegetables or salad.']
+                    instructions:['In a bowl, mix olive oil, lemon juice, garlic, herbs, salt, pepper, and paprika.','Add chicken, coat well. Cover and marinate for at least 30 minutes (up to 4 hours).','Preheat grill to medium-high heat.','Grill chicken 6-7 minutes per side until cooked through.','Let rest 5 minutes before serving.','Serve with grilled vegetables or salad.'],
+                    calories: 385, protein: 42, carbs: 5, fats: 21
                 },
                 { 
                     name:'Grilled Salmon', 
@@ -276,7 +276,8 @@
                     emoji:'🐟', 
                     tags:['Easy','Grilled','Omega-3'],
                     ingredients:['4 salmon fillets (6 oz each)','3 tbsp olive oil','2 lemons (1 juiced, 1 sliced)','3 garlic cloves, minced','2 tbsp fresh dill, chopped','1 tbsp fresh parsley, chopped','Salt and pepper to taste'],
-                    instructions:['Pat salmon dry with paper towels.','Mix olive oil, lemon juice, garlic, dill, parsley, salt, and pepper.','Brush mixture over salmon fillets. Let sit 10 minutes.','Preheat grill to medium-high, oil grates.','Place salmon skin-side down, grill 4-6 minutes per side.','Garnish with lemon slices and fresh herbs before serving.']
+                    instructions:['Pat salmon dry with paper towels.','Mix olive oil, lemon juice, garlic, dill, parsley, salt, and pepper.','Brush mixture over salmon fillets. Let sit 10 minutes.','Preheat grill to medium-high, oil grates.','Place salmon skin-side down, grill 4-6 minutes per side.','Garnish with lemon slices and fresh herbs before serving.'],
+                    calories: 450, protein: 38, carbs: 2, fats: 32
                 },
                 { 
                     name:'Healthy Muffins', 
@@ -289,7 +290,8 @@
                     emoji:'🧁', 
                     tags:['Easy','Baked','Snack'],
                     ingredients:['3 ripe bananas, mashed','1/3 cup honey or maple syrup','1/4 cup coconut oil, melted','2 eggs','1 tsp vanilla extract','1 1/2 cups whole wheat flour','1 cup rolled oats','1 tsp baking soda','1 tsp baking powder','1/2 tsp salt','1 tsp cinnamon','1 cup fresh or frozen blueberries'],
-                    instructions:['Preheat oven to 350°F and line muffin tin.','Mix mashed bananas, honey, oil, eggs, and vanilla.','In separate bowl, whisk flour, oats, baking soda, powder, salt, cinnamon.','Combine wet and dry ingredients until just mixed.','Gently fold in blueberries.','Divide batter among muffin cups.','Bake 20-25 minutes until toothpick comes out clean.','Cool 5 minutes in pan, then transfer to wire rack.']
+                    instructions:['Preheat oven to 350°F and line muffin tin.','Mix mashed bananas, honey, oil, eggs, and vanilla.','In separate bowl, whisk flour, oats, baking soda, powder, salt, cinnamon.','Combine wet and dry ingredients until just mixed.','Gently fold in blueberries.','Divide batter among muffin cups.','Bake 20-25 minutes until toothpick comes out clean.','Cool 5 minutes in pan, then transfer to wire rack.'],
+                    calories: 180, protein: 5, carbs: 28, fats: 6
                 },
                 { 
                     name:'Mushroom spinach scrambled eggs', 
@@ -302,7 +304,8 @@
                     emoji:'🍳', 
                     tags:['Easy','High Protein','Low Carb'],
                     ingredients:['4 large eggs','2 tbsp milk or water','1 tbsp olive oil or butter','1 cup mushrooms, sliced','2 cups fresh spinach','2 cloves garlic, minced','Salt and pepper to taste','2 tbsp grated Parmesan (optional)'],
-                    instructions:['Whisk eggs with milk, salt, and pepper in a bowl.','Heat oil in non-stick skillet over medium heat.','Add mushrooms and cook until browned, about 3-4 minutes.','Add garlic and spinach, cook until spinach wilts.','Reduce heat to low, pour in eggs.','Gently stir with spatula until eggs are softly set.','Sprinkle with Parmesan if using.','Serve immediately with whole grain toast.']
+                    instructions:['Whisk eggs with milk, salt, and pepper in a bowl.','Heat oil in non-stick skillet over medium heat.','Add mushrooms and cook until browned, about 3-4 minutes.','Add garlic and spinach, cook until spinach wilts.','Reduce heat to low, pour in eggs.','Gently stir with spatula until eggs are softly set.','Sprinkle with Parmesan if using.','Serve immediately with whole grain toast.'],
+                    calories: 310, protein: 22, carbs: 8, fats: 21
                 },
                 { 
                     name:'Spinach Pesto Pasta', 
@@ -315,7 +318,8 @@
                     emoji:'🍝', 
                     tags:['Easy','Vegetarian','Quick'],
                     ingredients:['12 oz whole wheat pasta','3 cups fresh spinach','1/2 cup fresh basil','1/4 cup pine nuts or walnuts','2 garlic cloves','1/2 cup olive oil','1/2 cup grated Parmesan','Salt and pepper to taste','1 lemon, juiced'],
-                    instructions:['Cook pasta according to package directions. Reserve 1/2 cup pasta water.','In food processor, combine spinach, basil, nuts, garlic, Parmesan, and lemon juice.','Pulse while slowly adding olive oil until smooth.','Season with salt and pepper.','Drain pasta, return to pot.','Add pesto and enough pasta water to create sauce.','Toss well and serve with extra Parmesan.']
+                    instructions:['Cook pasta according to package directions. Reserve 1/2 cup pasta water.','In food processor, combine spinach, basil, nuts, garlic, Parmesan, and lemon juice.','Pulse while slowly adding olive oil until smooth.','Season with salt and pepper.','Drain pasta, return to pot.','Add pesto and enough pasta water to create sauce.','Toss well and serve with extra Parmesan.'],
+                    calories: 520, protein: 18, carbs: 62, fats: 24
                 },
                 { 
                     name:'Steak', 
@@ -328,7 +332,8 @@
                     emoji:'🥩', 
                     tags:['Medium','Grilled','High Protein'],
                     ingredients:['2 ribeye or sirloin steaks (1 inch thick)','2 tbsp olive oil','2 tbsp butter','4 garlic cloves, smashed','3 sprigs fresh rosemary','Salt and coarse black pepper'],
-                    instructions:['Remove steaks from fridge 30 minutes before cooking. Pat dry.','Season generously with salt and pepper on both sides.','Heat oil in cast iron skillet over high heat until smoking.','Place steaks in pan, cook 3-4 minutes without moving.','Flip, add butter, garlic, and rosemary.','Tilt pan and baste steaks with melted butter for 2-3 minutes.','Cook to desired doneness (125°F for medium-rare).','Rest 5-10 minutes before slicing against the grain.']
+                    instructions:['Remove steaks from fridge 30 minutes before cooking. Pat dry.','Season generously with salt and pepper on both sides.','Heat oil in cast iron skillet over high heat until smoking.','Place steaks in pan, cook 3-4 minutes without moving.','Flip, add butter, garlic, and rosemary.','Tilt pan and baste steaks with melted butter for 2-3 minutes.','Cook to desired doneness (125°F for medium-rare).','Rest 5-10 minutes before slicing against the grain.'],
+                    calories: 490, protein: 46, carbs: 2, fats: 33
                 },
                 { 
                     name:'Tuna Salad', 
@@ -341,7 +346,8 @@
                     emoji:'🥗', 
                     tags:['Easy','No-Cook','High Protein'],
                     ingredients:['2 cans tuna in water, drained','4 cups mixed salad greens','1 cucumber, diced','1 cup cherry tomatoes, halved','1/2 red onion, thinly sliced','1/4 cup Kalamata olives','1/4 cup feta cheese, crumbled','Dressing: 3 tbsp olive oil, 1 lemon juiced, 1 tsp Dijon, 1 tsp oregano, salt, pepper'],
-                    instructions:['In a small bowl, whisk dressing ingredients.','In large bowl, combine greens, cucumber, tomatoes, onion, olives.','Flake tuna over the salad.','Drizzle with dressing and toss gently.','Top with feta cheese.','Serve immediately with crusty bread.']
+                    instructions:['In a small bowl, whisk dressing ingredients.','In large bowl, combine greens, cucumber, tomatoes, onion, olives.','Flake tuna over the salad.','Drizzle with dressing and toss gently.','Top with feta cheese.','Serve immediately with crusty bread.'],
+                    calories: 350, protein: 32, carbs: 12, fats: 20
                 },
                 { 
                     name:'Yogurt Granola Bowl', 
@@ -354,12 +360,11 @@
                     emoji:'🥣', 
                     tags:['Easy','No-Cook','Breakfast'],
                     ingredients:['2 cups Greek yogurt','1 cup granola','1 cup mixed berries (strawberries, blueberries, raspberries)','1 banana, sliced','2 tbsp honey or maple syrup','2 tbsp chia seeds','Fresh mint for garnish'],
-                    instructions:['Divide yogurt between two bowls.','Top with granola, berries, and banana slices.','Drizzle with honey.','Sprinkle with chia seeds.','Garnish with fresh mint.','Serve immediately for crunchy granola.']
+                    instructions:['Divide yogurt between two bowls.','Top with granola, berries, and banana slices.','Drizzle with honey.','Sprinkle with chia seeds.','Garnish with fresh mint.','Serve immediately for crunchy granola.'],
+                    calories: 420, protein: 18, carbs: 52, fats: 16
                 }
             ]
         },
-    
-    // ========== Mark Oriental recipes section  =========
         oriental: { 
             name: 'Oriental', 
             icon: 'fas fa-utensils', 
@@ -375,7 +380,8 @@
                     emoji:'🍲', 
                     tags:['Medium','Oriental','Celebration'],
                     ingredients:['2 cups Egyptian rice','4 pita bread, toasted and broken','500g lamb or beef, cooked and shredded','4 garlic cloves, minced','1/4 cup vinegar','2 cups tomato sauce','1 tsp cumin','Salt and pepper','2 tbsp ghee or butter','Broth from cooking meat'],
-                    instructions:['Cook meat with salt, pepper, and spices until tender. Reserve broth.','Cook rice in meat broth until fluffy.','In a pan, sauté garlic in ghee until fragrant, add vinegar and simmer.','In serving dish, layer broken pita, then rice, then meat.','Pour garlic-vinegar mixture over.','Heat tomato sauce with cumin and pour on top.','Garnish with fried nuts and parsley. Serve hot.']
+                    instructions:['Cook meat with salt, pepper, and spices until tender. Reserve broth.','Cook rice in meat broth until fluffy.','In a pan, sauté garlic in ghee until fragrant, add vinegar and simmer.','In serving dish, layer broken pita, then rice, then meat.','Pour garlic-vinegar mixture over.','Heat tomato sauce with cumin and pour on top.','Garnish with fried nuts and parsley. Serve hot.'],
+                    calories: 680, protein: 32, carbs: 85, fats: 24
                 },
                 { 
                     name:'Golash', 
@@ -388,7 +394,8 @@
                     emoji:'🥟', 
                     tags:['Hard','Oriental','Savory-Sweet'],
                     ingredients:['1 package phyllo dough','500g ground beef or lamb','1 large onion, finely chopped','1 tsp cinnamon','1/2 tsp allspice','Salt and pepper','1/2 cup walnuts or pine nuts','1 cup butter, melted','Syrup: 2 cups sugar, 1 cup water, 1 lemon juice, 1 tsp rose water'],
-                    instructions:['Prepare syrup: boil sugar, water, lemon for 10 minutes, add rose water, cool.','Sauté onion, add meat and spices, cook until browned. Stir in nuts.','Layer phyllo in buttered pan, brushing each layer with butter.','Spread meat mixture, cover with more buttered phyllo layers.','Cut into squares or rectangles before baking.','Bake at 350°F for 35-40 minutes until golden.','Pour cold syrup over hot golash. Let absorb before serving.']
+                    instructions:['Prepare syrup: boil sugar, water, lemon for 10 minutes, add rose water, cool.','Sauté onion, add meat and spices, cook until browned. Stir in nuts.','Layer phyllo in buttered pan, brushing each layer with butter.','Spread meat mixture, cover with more buttered phyllo layers.','Cut into squares or rectangles before baking.','Bake at 350°F for 35-40 minutes until golden.','Pour cold syrup over hot golash. Let absorb before serving.'],
+                    calories: 520, protein: 18, carbs: 55, fats: 28
                 },
                 { 
                     name:'Hamam Mahshi', 
@@ -401,7 +408,8 @@
                     emoji:'🕊️', 
                     tags:['Hard','Oriental','Special Occasion'],
                     ingredients:['4 pigeons, cleaned','1 cup freekeh or rice','1 onion, finely chopped','1/4 cup ghee or butter','1 tsp cinnamon','1 tsp allspice','Salt and pepper','2 cups chicken broth','1/2 cup nuts for garnish'],
-                    instructions:['Rinse pigeons and pat dry.','Cook freekeh with half the broth and spices until partially done.','Stuff pigeons with freekeh mixture, secure openings.','Brown pigeons in ghee on all sides.','Add remaining broth, cover and simmer for 45-60 minutes until tender.','Remove pigeons, strain broth for sauce.','Serve pigeons on a bed of extra freekeh, drizzle with broth, garnish with nuts.']
+                    instructions:['Rinse pigeons and pat dry.','Cook freekeh with half the broth and spices until partially done.','Stuff pigeons with freekeh mixture, secure openings.','Brown pigeons in ghee on all sides.','Add remaining broth, cover and simmer for 45-60 minutes until tender.','Remove pigeons, strain broth for sauce.','Serve pigeons on a bed of extra freekeh, drizzle with broth, garnish with nuts.'],
+                    calories: 590, protein: 35, carbs: 48, fats: 29
                 },
                 { 
                     name:'Hawawshi', 
@@ -414,7 +422,8 @@
                     emoji:'🥙', 
                     tags:['Medium','Oriental','Savory'],
                     ingredients:['500g ground beef or lamb','1 large onion, grated','2 bell peppers, finely minced','3 garlic cloves, minced','1 tsp cumin','1 tsp paprika','1/2 tsp cayenne (optional)','Salt and pepper','6 large pita breads','Butter or oil for brushing'],
-                    instructions:['Mix meat, onion, peppers, garlic, and spices thoroughly.','Cut pita in half to create pockets.','Stuff each pocket with meat mixture, spread evenly.','Press gently to flatten.','Brush outsides with butter or oil.','Place on baking sheet, bake at 375°F for 20-25 minutes until meat is cooked and bread is crispy.','Serve hot with tahini sauce or yogurt.']
+                    instructions:['Mix meat, onion, peppers, garlic, and spices thoroughly.','Cut pita in half to create pockets.','Stuff each pocket with meat mixture, spread evenly.','Press gently to flatten.','Brush outsides with butter or oil.','Place on baking sheet, bake at 375°F for 20-25 minutes until meat is cooked and bread is crispy.','Serve hot with tahini sauce or yogurt.'],
+                    calories: 480, protein: 28, carbs: 42, fats: 23
                 },
                 { 
                     name:'Kofta', 
@@ -427,7 +436,8 @@
                     emoji:'🍢', 
                     tags:['Easy','Oriental','Grilled'],
                     ingredients:['500g ground beef or lamb','1 large onion, grated','1/4 cup fresh parsley, finely chopped','1 tsp cumin','1 tsp paprika','1/2 tsp cinnamon','1/2 tsp allspice','Salt and pepper','Skewers (metal or wooden soaked)'],
-                    instructions:['Combine all ingredients in a bowl, mix well with hands.','Cover and refrigerate for at least 1 hour.','Divide mixture, shape around skewers in long oval shapes.','Preheat grill or grill pan to medium-high.','Grill kofta 4-5 minutes per side until cooked through.','Serve with pita, grilled vegetables, and tahini sauce.']
+                    instructions:['Combine all ingredients in a bowl, mix well with hands.','Cover and refrigerate for at least 1 hour.','Divide mixture, shape around skewers in long oval shapes.','Preheat grill or grill pan to medium-high.','Grill kofta 4-5 minutes per side until cooked through.','Serve with pita, grilled vegetables, and tahini sauce.'],
+                    calories: 410, protein: 32, carbs: 8, fats: 28
                 },
                 { 
                     name:'Macrona Bashamel', 
@@ -440,7 +450,8 @@
                     emoji:'🍝', 
                     tags:['Medium','Oriental','Baked'],
                     ingredients:['500g penne or any pasta','500g ground beef','1 onion, chopped','2 cups tomato sauce','1 tsp cumin','1 tsp paprika','Salt and pepper','For béchamel: 4 cups milk, 4 tbsp butter, 4 tbsp flour, 1/2 tsp nutmeg, salt, pepper','1 egg (optional, for béchamel)'],
-                    instructions:['Cook pasta according to package, drain.','Brown meat with onion, add tomato sauce and spices, simmer.','Make béchamel: melt butter, add flour, whisk 2 minutes. Gradually add milk, whisk until thick. Season with nutmeg, salt, pepper. Optional: beat egg and stir into cooled béchamel.','In baking dish, layer half pasta, all meat, remaining pasta.','Pour béchamel over, spread evenly.','Bake at 375°F for 30-35 minutes until golden.','Let rest 10 minutes before serving.']
+                    instructions:['Cook pasta according to package, drain.','Brown meat with onion, add tomato sauce and spices, simmer.','Make béchamel: melt butter, add flour, whisk 2 minutes. Gradually add milk, whisk until thick. Season with nutmeg, salt, pepper. Optional: beat egg and stir into cooled béchamel.','In baking dish, layer half pasta, all meat, remaining pasta.','Pour béchamel over, spread evenly.','Bake at 375°F for 30-35 minutes until golden.','Let rest 10 minutes before serving.'],
+                    calories: 650, protein: 28, carbs: 72, fats: 30
                 },
                 { 
                     name:'Molokhia', 
@@ -453,7 +464,8 @@
                     emoji:'🥬', 
                     tags:['Medium','Oriental','Traditional'],
                     ingredients:['500g frozen molokhia (jute leaves), finely chopped','4 chicken pieces or rabbit','8 cups chicken broth','6 garlic cloves, minced','2 tbsp dried coriander','2 tbsp ghee or butter','Salt and pepper','2 cups white rice for serving'],
-                    instructions:['Cook chicken in broth until tender. Remove chicken, shred meat, reserve broth.','Bring broth to boil, add frozen molokhia. Stir well.','In separate pan, fry garlic in ghee until golden, add coriander.','Pour garlic mixture into soup, simmer 5-10 minutes. Do not overcook.','Serve hot in bowls over rice, with chicken on side.','Optional: add a squeeze of lemon.']
+                    instructions:['Cook chicken in broth until tender. Remove chicken, shred meat, reserve broth.','Bring broth to boil, add frozen molokhia. Stir well.','In separate pan, fry garlic in ghee until golden, add coriander.','Pour garlic mixture into soup, simmer 5-10 minutes. Do not overcook.','Serve hot in bowls over rice, with chicken on side.','Optional: add a squeeze of lemon.'],
+                    calories: 380, protein: 24, carbs: 45, fats: 14
                 },
                 { 
                     name:'Sheesh Tawook', 
@@ -466,7 +478,8 @@
                     emoji:'🍗', 
                     tags:['Easy','Oriental','Grilled'],
                     ingredients:['600g chicken breast, cubed','1 cup yogurt','3 garlic cloves, minced','2 tbsp lemon juice','2 tbsp olive oil','1 tsp paprika','1 tsp oregano','1/2 tsp cinnamon','Salt and pepper','Bell peppers and onions for skewering'],
-                    instructions:['Mix yogurt, garlic, lemon, oil, and spices.','Add chicken, coat well. Marinate at least 4 hours or overnight.','Thread chicken onto skewers alternating with peppers and onions.','Preheat grill to medium-high.','Grill 5-7 minutes per side until chicken is cooked.','Serve with garlic sauce, pita, and grilled vegetables.']
+                    instructions:['Mix yogurt, garlic, lemon, oil, and spices.','Add chicken, coat well. Marinate at least 4 hours or overnight.','Thread chicken onto skewers alternating with peppers and onions.','Preheat grill to medium-high.','Grill 5-7 minutes per side until chicken is cooked.','Serve with garlic sauce, pita, and grilled vegetables.'],
+                    calories: 420, protein: 38, carbs: 10, fats: 25
                 },
                 { 
                     name:'Wara Enab', 
@@ -479,12 +492,11 @@
                     emoji:'🍃', 
                     tags:['Hard','Oriental','Vegetarian Option'],
                     ingredients:['1 jar grape leaves (about 40-50 leaves)','2 cups short grain rice, rinsed','1 large onion, finely chopped','1/2 cup fresh parsley, chopped','1/4 cup fresh mint, chopped','1 tsp cinnamon','1 tsp allspice','Salt and pepper','1/2 cup olive oil','3 lemons, juiced','2 cups vegetable or chicken broth'],
-                    instructions:['Rinse grape leaves, trim stems. Blanch in hot water if needed.','Mix rice, onion, herbs, spices, salt, pepper, and half the oil.','Place a leaf shiny side down, put small amount of filling near stem.','Fold sides over filling, roll tightly like a cigar.','Line pot with broken leaves, layer stuffed leaves snugly.','Pour remaining oil, lemon juice, and broth over.','Place an inverted plate on top to weigh down.','Simmer covered for 45-60 minutes until rice is cooked.','Let rest before serving. Serve with yogurt.']
+                    instructions:['Rinse grape leaves, trim stems. Blanch in hot water if needed.','Mix rice, onion, herbs, spices, salt, pepper, and half the oil.','Place a leaf shiny side down, put small amount of filling near stem.','Fold sides over filling, roll tightly like a cigar.','Line pot with broken leaves, layer stuffed leaves snugly.','Pour remaining oil, lemon juice, and broth over.','Place an inverted plate on top to weigh down.','Simmer covered for 45-60 minutes until rice is cooked.','Let rest before serving. Serve with yogurt.'],
+                    calories: 350, protein: 8, carbs: 52, fats: 14
                 }
             ]
         },
-        
-    // ========== Malak desserts recipes section  =========
         desserts: { 
             name: 'Desserts', 
             icon: 'fas fa-candy-cane', 
@@ -500,7 +512,8 @@
                     emoji:'🍯',
                     tags:['Medium','Oriental','Syrup'],
                     ingredients:['1 package phyllo dough','2 cups mixed nuts (walnuts, pistachios)','1 cup butter, melted','1 tsp cinnamon','1 cup sugar','1 cup water','1 tbsp lemon juice','1 tsp rose water'],
-                    instructions:['Layer phyllo in buttered pan, brushing each layer with butter.','Sprinkle nut mixture every few layers.','Cut into diamonds before baking.','Bake at 350°F for 30-35 minutes until golden.','Boil sugar, water, lemon for syrup, add rose water.','Pour cold syrup over hot baklava. Let absorb.']
+                    instructions:['Layer phyllo in buttered pan, brushing each layer with butter.','Sprinkle nut mixture every few layers.','Cut into diamonds before baking.','Bake at 350°F for 30-35 minutes until golden.','Boil sugar, water, lemon for syrup, add rose water.','Pour cold syrup over hot baklava. Let absorb.'],
+                    calories: 320, protein: 5, carbs: 35, fats: 19
                 },
                 {
                     name:'Basbousa',
@@ -513,7 +526,8 @@
                     emoji:'🍰',
                     tags:['Easy','Oriental','Sweet'],
                     ingredients:['2 cups semolina','1 cup sugar','1 cup yogurt','1/2 cup coconut flakes','1/2 cup butter, melted','1 tsp baking powder','1 tsp vanilla','Syrup: 2 cups sugar, 1 cup water, 1 lemon'],
-                    instructions:['Mix semolina, sugar, coconut, baking powder.','Add yogurt, butter, vanilla, mix well.','Pour into greased pan, smooth top.','Bake at 350°F for 30 minutes.','Boil syrup ingredients, pour over hot basbousa.','Let cool, cut into squares.']
+                    instructions:['Mix semolina, sugar, coconut, baking powder.','Add yogurt, butter, vanilla, mix well.','Pour into greased pan, smooth top.','Bake at 350°F for 30 minutes.','Boil syrup ingredients, pour over hot basbousa.','Let cool, cut into squares.'],
+                    calories: 380, protein: 5, carbs: 58, fats: 15
                 },
                 {
                     name:'Kahk',
@@ -526,7 +540,8 @@
                     emoji:'🍪',
                     tags:['Medium','Oriental','Holiday'],
                     ingredients:['4 cups flour','2 cups butter, softened','1 cup powdered sugar','1 tbsp sesame seeds','1 tsp vanilla','1 tsp baking powder','1/2 cup date paste or nuts for filling'],
-                    instructions:['Cream butter and sugar until fluffy.','Add vanilla, mix.','Add flour gradually until dough forms.','Take small pieces, stuff with dates or nuts.','Shape into balls or rings.','Bake at 350°F for 20 minutes until pale golden.','Dust with powdered sugar while warm.']
+                    instructions:['Cream butter and sugar until fluffy.','Add vanilla, mix.','Add flour gradually until dough forms.','Take small pieces, stuff with dates or nuts.','Shape into balls or rings.','Bake at 350°F for 20 minutes until pale golden.','Dust with powdered sugar while warm.'],
+                    calories: 210, protein: 3, carbs: 25, fats: 11
                 },
                 {
                     name:'Kunafa',
@@ -539,7 +554,8 @@
                     emoji:'🍮',
                     tags:['Hard','Oriental','Decadent'],
                     ingredients:['500g kunafa dough (shredded phyllo)','250g butter, melted','500g sweet cheese (mozzarella + akkawi)','1/2 cup crushed pistachios','Syrup: 2 cups sugar, 1 cup water, 1 tsp rose water', '1 tsp orange blossom water'],
-                    instructions:['Shred kunafa dough finely, mix with melted butter.','Press half into pan, add cheese layer.','Cover with remaining dough, press firmly.','Bake at 375°F for 35 minutes until golden.','Pour cold syrup over hot kunafa immediately.','Garnish with pistachios.']
+                    instructions:['Shred kunafa dough finely, mix with melted butter.','Press half into pan, add cheese layer.','Cover with remaining dough, press firmly.','Bake at 375°F for 35 minutes until golden.','Pour cold syrup over hot kunafa immediately.','Garnish with pistachios.'],
+                    calories: 550, protein: 12, carbs: 65, fats: 28
                 },
                 {
                     name:'Molten Cake',
@@ -552,7 +568,8 @@
                     emoji:'🍫',
                     tags:['Medium','Chocolate','Decadent'],
                     ingredients:['200g dark chocolate','1/2 cup butter','3 eggs','1/2 cup sugar','1/4 cup flour','1 tsp vanilla','Pinch of salt'],
-                    instructions:['Melt chocolate and butter together.','Beat eggs and sugar until pale.','Fold in flour, then chocolate mixture.','Pour into greased ramekins.','Bake at 425°F for 12-14 minutes.','Let rest 1 minute, then invert onto plates.','Serve immediately with ice cream.']
+                    instructions:['Melt chocolate and butter together.','Beat eggs and sugar until pale.','Fold in flour, then chocolate mixture.','Pour into greased ramekins.','Bake at 425°F for 12-14 minutes.','Let rest 1 minute, then invert onto plates.','Serve immediately with ice cream.'],
+                    calories: 480, protein: 8, carbs: 48, fats: 30
                 },
                 {
                     name:'Om Ali',
@@ -565,7 +582,8 @@
                     emoji:'🥣',
                     tags:['Easy','Oriental','Comfort'],
                     ingredients:['1 package puff pastry or croissants','4 cups milk','1 cup sugar','1/2 cup raisins','1/2 cup coconut flakes','1/2 cup mixed nuts','1 tsp vanilla','1/2 cup cream'],
-                    instructions:['Bake pastry until golden, break into pieces.','Heat milk, sugar, vanilla.','Layer pastry, nuts, raisins, coconut in dish.','Pour hot milk over, let soak.','Bake at 350°F for 15 minutes.','Drizzle with cream, broil 2 minutes until golden.']
+                    instructions:['Bake pastry until golden, break into pieces.','Heat milk, sugar, vanilla.','Layer pastry, nuts, raisins, coconut in dish.','Pour hot milk over, let soak.','Bake at 350°F for 15 minutes.','Drizzle with cream, broil 2 minutes until golden.'],
+                    calories: 420, protein: 12, carbs: 58, fats: 18
                 },
                 {
                     name:'Qatayef',
@@ -578,7 +596,8 @@
                     emoji:'🥟',
                     tags:['Medium','Oriental','Ramadan'],
                     ingredients:['2 cups semolina','1/2 cup flour','2 cups water','1 tbsp sugar','1 tsp yeast','1/2 tsp salt','Filling: 2 cups nuts, 1/2 cup sugar, 1 tsp cinnamon','Oil for frying','Syrup: 2 cups sugar, 1 cup water, 1 lemon'],
-                    instructions:['Mix dry ingredients, add water, let rest 30 minutes.','Cook small pancakes on one side only.','Fill with nut mixture, seal edges.','Fry until golden or bake.','Dip in cold syrup.']
+                    instructions:['Mix dry ingredients, add water, let rest 30 minutes.','Cook small pancakes on one side only.','Fill with nut mixture, seal edges.','Fry until golden or bake.','Dip in cold syrup.'],
+                    calories: 280, protein: 6, carbs: 42, fats: 10
                 },
                 {
                     name:'Roz Bel Laban',
@@ -591,7 +610,8 @@
                     emoji:'🥛',
                     tags:['Easy','Oriental','Comfort'],
                     ingredients:['1/2 cup short grain rice','4 cups milk','1/2 cup sugar','1 tsp vanilla','Cinnamon powder','Chopped nuts for garnish'],
-                    instructions:['Wash rice, soak for 30 minutes, drain.','Cook rice with milk until soft and creamy.','Add sugar and vanilla, cook until thickened.','Pour into serving bowls.','Chill for 2 hours.','Sprinkle with cinnamon and nuts before serving.']
+                    instructions:['Wash rice, soak for 30 minutes, drain.','Cook rice with milk until soft and creamy.','Add sugar and vanilla, cook until thickened.','Pour into serving bowls.','Chill for 2 hours.','Sprinkle with cinnamon and nuts before serving.'],
+                    calories: 290, protein: 8, carbs: 52, fats: 6
                 },
                 {
                     name:'Zalabya',
@@ -604,11 +624,11 @@
                     emoji:'🍩',
                     tags:['Medium','Oriental','Fried'],
                     ingredients:['2 cups flour','1 tbsp yeast','1 tbsp sugar','1/2 tsp salt','1 cup warm water','Syrup: 2 cups sugar, 1 cup water, 1 lemon','Oil for frying'],
-                    instructions:['Mix yeast with warm water and sugar, let foam.','Add flour, salt, mix into sticky dough.','Cover, let rise 1 hour.','Heat oil, drop spoonfuls of dough.','Fry until golden on both sides.','Dip in cold syrup while hot.']
+                    instructions:['Mix yeast with warm water and sugar, let foam.','Add flour, salt, mix into sticky dough.','Cover, let rise 1 hour.','Heat oil, drop spoonfuls of dough.','Fry until golden on both sides.','Dip in cold syrup while hot.'],
+                    calories: 250, protein: 4, carbs: 32, fats: 12
                 }
             ]
         },
-        
     // ========== Malak street recipes section  =========
         street: { 
             name: 'Street Food', 
